@@ -1124,7 +1124,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
               <button class="chip" type="button" data-faqunit="6" aria-pressed="false">6단원</button>
             </div>
 
-            <a class="kakao-bar" href="https://pf.kakao.com/_xoCxfsn" target="_blank" rel="noopener noreferrer">
+            <a class="kakao-bar" href="https://pf.kakao.com/_xoCxfsn/chat" target="_blank" rel="noopener noreferrer">
               <span><b>찾는 답이 없나요?</b> 카카오채널로 바로 물어보세요</span>
               <span class="kb-go">1:1 질문 <svg width="11" height="11"><use href="#i-arrow"/></svg></span>
             </a>
@@ -3711,7 +3711,7 @@ window.CONFIG = {
       '<div class="ad-sec"><div class="ad-sec-head"><h2>' + (l.id ? "상품 수정" : "상품 추가") + '</h2></div><div class="ad-sec-body">' +
       '<form id="adCatalogForm"><input type="hidden" id="aiId" value="' + esc(l.id || "") + '">' +
       '<div class="form-row three">' +
-      '<label class="field"><span class="k">종류</span><select id="aiKind">' +
+      '<label class="field"><span class="k">종류</span><select id="aiKind" aria-label="상품 종류">' +
       ["class", "vod", "book", "nje"].map(function (k) { return '<option value="' + k + '"' + (kindSel === k ? " selected" : "") + '>' + ({ class: "수강 클래스", vod: "VOD 인강", book: "교재", nje: "N제" }[k]) + '</option>'; }).join("") + '</select>' +
       '<span class="hint">수강 클래스·VOD 인강 → 수강신청 탭 / 교재·N제 → 교재·N제 탭</span></label>' +
       '<label class="field"><span class="k">상품명</span><input type="text" id="aiName" value="' + esc(l.name || "") + '" placeholder="1~2월 선행반" required></label>' +
