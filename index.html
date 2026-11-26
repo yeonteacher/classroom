@@ -3270,7 +3270,10 @@ window.CONFIG = {
     });
   }
 
+  var wmRunning = false;
   function watermarkDownload(url, path, label) {
+    if (wmRunning) { return; }
+    wmRunning = true;
     var who = wmWho();
     var stamp = wmStampText(new Date());
     var name = wmFileName(path, label);
@@ -3285,10 +3288,12 @@ window.CONFIG = {
           .then(function (doc) { return wmApply(PDFLib, doc, who, stamp); });
       });
     }).then(function (bytes) {
+      wmRunning = false;
       wmBusy(false);
       wmSaveBytes(bytes, name);
       window.__engine.toast("‘" + (label || name) + "’ — 내 이름 워터마크를 찍어 내려받았어요.");
     }).catch(function (err) {
+      wmRunning = false;
       wmBusy(false);
       console.warn("[워터마크] 처리 실패:", err && err.message ? err.message : err);
       if (err && err.rawBytes) {
