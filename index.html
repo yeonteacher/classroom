@@ -352,8 +352,8 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .class-head h1{margin-top:2px}
 .class-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
 
-/* ───────── bottom tabbar (3 tabs) ───────── */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(255,255,255,.97);backdrop-filter:saturate(180%) blur(14px);border-top:1px solid var(--line);padding:7px 8px calc(env(safe-area-inset-bottom) + 7px)}
+/* ───────── bottom tabbar (4 tabs) ───────── */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.97);backdrop-filter:saturate(180%) blur(14px);border-top:1px solid var(--line);padding:7px 8px calc(env(safe-area-inset-bottom) + 7px)}
 .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0 4px;border-radius:10px;color:var(--muted);font-size:10.5px;font-weight:600;letter-spacing:-.02em;text-align:center}
 .tab svg{width:21px;height:21px}
 .tab:hover{color:var(--ink-2)}
@@ -930,8 +930,11 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
       <button class="side-link" type="button" data-tab="qna">
         <svg width="18" height="18"><use href="#i-chat"/></svg> 질문방
       </button>
-      <button class="side-link" type="button" data-tab="store">
-        <svg width="18" height="18"><use href="#i-book"/></svg> 강의·교재
+      <button class="side-link" type="button" data-tab="enroll">
+        <svg width="18" height="18"><use href="#i-tag"/></svg> 수강신청
+      </button>
+      <button class="side-link" type="button" data-tab="books">
+        <svg width="18" height="18"><use href="#i-book"/></svg> 교재·N제
       </button>
     </nav>
     <div class="side-foot">
@@ -1015,9 +1018,9 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
           <div class="card pad" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
             <div style="min-width:0">
               <h3 style="font-size:14px;font-weight:650;letter-spacing:-.02em">다음 학기 준비</h3>
-              <p style="font-size:12.4px;color:var(--muted);margin-top:5px;line-height:1.6">3~6월 개념완성반과 2028 성직 5단원 입문편은 <b style="color:var(--ink-2);font-weight:600">강의·교재</b>에서 확인할 수 있어요.</p>
+              <p style="font-size:12.4px;color:var(--muted);margin-top:5px;line-height:1.6">3~6월 개념완성반은 <b style="color:var(--ink-2);font-weight:600">수강신청</b>에서, 2028 성직 5단원 입문편은 <b style="color:var(--ink-2);font-weight:600">교재·N제</b>에서 확인할 수 있어요.</p>
             </div>
-            <button class="btn btn-ghost btn-sm" type="button" data-tab="store">강의·교재 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>
+            <button class="btn btn-ghost btn-sm" type="button" data-tab="enroll">수강신청 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>
           </div>
         </div>
       </section>
@@ -1135,10 +1138,9 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
               <div class="k-ico">TALK</div>
               <h3>FAQ로 해결되지 않았나요?</h3>
               <p>카카오채널 <b style="color:var(--ink-2);font-weight:650">‘직탐은연티’</b>로 1:1 질문을 남겨 주세요. 선생님이 직접 확인하고 답변드려요.</p>
-              <a class="btn btn-primary" href="https://pf.kakao.com/_xoCxfsn" target="_blank" rel="noopener noreferrer">
+              <a class="btn btn-primary" href="https://pf.kakao.com/_xoCxfsn/chat" target="_blank" rel="noopener noreferrer">
                 <svg width="17" height="17"><use href="#i-chat"/></svg> 카카오채널로 1:1 질문하기
               </a>
-              <a class="alt" href="http://pf.kakao.com/_xoCxfsn/chat" target="_blank" rel="noopener noreferrer">채널 채팅 바로 열기</a>
             </div>
 
             <div class="card pad" style="margin-top:16px">
@@ -1157,27 +1159,19 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
         </div>
       </section>
 
-      <!-- ═══════════ 3. 강의·교재 ═══════════ -->
-      <section class="view" data-view="store" aria-labelledby="v3">
+      <!-- ═══════════ 3. 수강신청 ═══════════ -->
+      <section class="view" data-view="enroll" aria-labelledby="v3">
         <div class="page-head">
-          <h1 id="v3">강의·교재</h1>
-          <p class="sub">2028학년도 수능 <b>『성공적인 직업생활』</b> 단일 과목 — 이연화 선생님의 클래스와 자체 교재, VOD 인강입니다. <b>수강하지 않아도 교재만 구매</b>할 수 있어요.</p>
+          <h1 id="v3">수강신청</h1>
+          <p class="sub">2028학년도 수능 <b>『성공적인 직업생활』</b> 단일 과목 — 이연화 선생님의 <b>수강 클래스</b>와 <b>VOD 인강</b>입니다. 교재와 N제는 <b>교재·N제</b> 탭에서 확인할 수 있어요.</p>
         </div>
 
         <div class="section" style="margin-top:0">
           <div class="section-head">
-            <h2><svg width="17" height="17"><use href="#i-video"/></svg> 수강 신청</h2>
+            <h2><svg width="17" height="17"><use href="#i-home"/></svg> 수강 클래스</h2>
             <span class="sm-hint">수강료는 사전 상담 후 개별로 안내드려요</span>
           </div>
           <div class="prod-grid" id="storeClasses"><!-- js --></div>
-        </div>
-
-        <div class="section">
-          <div class="section-head">
-            <h2><svg width="17" height="17"><use href="#i-tag"/></svg> 교재</h2>
-            <span class="sm-hint">자체 제작 교재 · 출간 일정은 확정되는 대로 공지</span>
-          </div>
-          <div class="prod-grid" id="storeBooks"><!-- js --></div>
         </div>
 
         <div class="section">
@@ -1191,7 +1185,46 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
         <div class="section">
           <div class="note">
             <svg width="15" height="15"><use href="#i-info"/></svg>
-            <span><b>결제 안내</b> — 신청·구매 버튼을 누르면 아임웹(<b>yeonteacher.kr</b>) 결제 페이지로 연결됩니다. 결제 후 선생님이 <b>결제할 때 적은 구글 이메일</b>을 등록하면 이 강의실에 클래스·교재가 열립니다. 환불·현금영수증은 아임웹 주문 내역에서 처리돼요.</span>
+            <span><b>결제 안내</b> — 신청 버튼을 누르면 <b>공식 홈페이지(yeonteacher.kr) 결제 페이지</b>로 연결됩니다. 결제 후 선생님이 <b>결제할 때 적은 구글 이메일</b>을 등록하면 이 강의실에 클래스가 열립니다. 환불·현금영수증은 결제 페이지의 주문 내역에서 처리돼요.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 4. 교재·N제 ═══════════ -->
+      <section class="view" data-view="books" aria-labelledby="v4">
+        <div class="page-head">
+          <h1 id="v4">교재·N제</h1>
+          <p class="sub">이연화 선생님이 직접 만든 <b>교재</b>와 <b>N제</b>입니다. <b>수강하지 않아도 구매</b>할 수 있고, 구매가 확인되면 이 화면에서 바로 내려받을 수 있어요.</p>
+        </div>
+
+        <div class="section" style="margin-top:0" id="myBooksSec" hidden>
+          <div class="section-head">
+            <h2><svg width="17" height="17"><use href="#i-download"/></svg> 내 교재·N제</h2>
+            <span class="sm-hint">구매가 확인된 교재는 눌러서 바로 내려받을 수 있어요</span>
+          </div>
+          <div id="myBooks"><!-- js --></div>
+        </div>
+
+        <div class="section" id="booksSec">
+          <div class="section-head">
+            <h2><svg width="17" height="17"><use href="#i-book"/></svg> 교재</h2>
+            <span class="sm-hint">자체 제작 교재 · 출간 일정은 확정되는 대로 공지</span>
+          </div>
+          <div class="prod-grid" id="storeBooks"><!-- js --></div>
+        </div>
+
+        <div class="section" id="njeSec">
+          <div class="section-head">
+            <h2><svg width="17" height="17"><use href="#i-check-sq"/></svg> N제</h2>
+            <span class="sm-hint">2028 대비 실전 문항 모음</span>
+          </div>
+          <div class="prod-grid" id="storeNje"><!-- js --></div>
+        </div>
+
+        <div class="section">
+          <div class="note">
+            <svg width="15" height="15"><use href="#i-info"/></svg>
+            <span><b>구매 안내</b> — 구매 버튼을 누르면 <b>공식 홈페이지(yeonteacher.kr) 결제 페이지</b>로 연결됩니다. 결제 후 선생님이 <b>결제할 때 적은 구글 이메일</b>을 등록하면 이 화면에서 교재·N제 PDF를 내려받을 수 있어요.</span>
           </div>
         </div>
       </section>
@@ -1209,8 +1242,11 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
       <button class="tab" type="button" role="tab" data-tab="qna" aria-selected="false">
         <svg><use href="#i-chat"/></svg> 질문방
       </button>
-      <button class="tab" type="button" role="tab" data-tab="store" aria-selected="false">
-        <svg><use href="#i-book"/></svg> 강의·교재
+      <button class="tab" type="button" role="tab" data-tab="enroll" aria-selected="false">
+        <svg><use href="#i-tag"/></svg> 수강신청
+      </button>
+      <button class="tab" type="button" role="tab" data-tab="books" aria-selected="false">
+        <svg><use href="#i-book"/></svg> 교재·N제
       </button>
     </nav>
   </div>
@@ -1242,7 +1278,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
           <button type="button" data-adtab="quizzes" aria-pressed="false">쪽지시험</button>
           <button type="button" data-adtab="homework" aria-pressed="false">숙제 확인</button>
           <button type="button" data-adtab="faqs" aria-pressed="false">질문방 FAQ</button>
-          <button type="button" data-adtab="catalog" aria-pressed="false">강의·교재</button>
+          <button type="button" data-adtab="catalog" aria-pressed="false">수강·교재 상품</button>
         </nav>
       </div>
       <main class="ad-content" id="adBody"></main>
@@ -1309,7 +1345,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
   </div>
   <div class="sheet-body">
     <div class="player">
-      <div class="pl-title"><svg width="17" height="17"><use href="#i-play"/></svg> <span id="playName">02강 · 근로계약과 근로조건</span></div>
+      <div class="pl-title"><svg width="17" height="17"><use href="#i-play"/></svg> <span id="playName">2회 · 근로계약과 근로조건</span></div>
       <ul>
         <li><b>배속 재생</b> 0.75 · 1.0 · 1.25 · 1.5배까지 조절할 수 있어요.</li>
         <li><b>구간 이동</b> 판서가 바뀌는 지점으로 10초 단위 이동이 돼요.</li>
@@ -1352,13 +1388,13 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
   <div class="sheet-foot" id="hwFootM"><!-- js --></div>
 </div>
 
-<!-- 강의·교재 결제 안내 -->
+<!-- 결제 안내 -->
 <div class="sheet" id="sheetStore" role="dialog" aria-modal="true" aria-labelledby="storeTitle">
   <div class="sheet-grab"></div>
   <div class="sheet-head">
     <div>
       <h2 id="storeTitle">결제 페이지 안내</h2>
-      <p id="storeSub">아임웹 비노출 결제 페이지로 연결됩니다.</p>
+      <p id="storeSub">공식 홈페이지 결제 페이지로 연결됩니다.</p>
     </div>
     <button class="sheet-close" type="button" data-close aria-label="닫기"><svg width="15" height="15"><use href="#i-close"/></svg></button>
   </div>
@@ -1441,14 +1477,14 @@ window.CONFIG = {
   /* ══════════ 질문방 FAQ (수강 중인 클래스 FAQ 통합) ══════════ */
   var FAQS = [];
 
-  /* ══════════ 강의·교재 ══════════ */
+  /* ══════════ 수강·교재 카탈로그 (엔진 데모) ══════════ */
   var STORE = {
     classes: [
       { id: "winter", name: "1~2월 선행반", sub: "근로관계 법령 집중 · 겨울방학 선행", meta: ["1/7 ~ 2/25", "7주 · 매주 목 14:00", "이연화 선생님"],
         badge: "수강 중", tone: "badge-blue", price: "수강 중인 클래스", priceNote: "내 강의실에서 이어서 들을 수 있어요", cta: "강의실 가기", act: "go-class" },
-      { id: "con", name: "3~6월 개념완성반", sub: "6개 영역 전 범위 개념 완성", meta: ["3.2 ~ 6.30", "24강"],
+      { id: "con", name: "3~6월 개념완성반", sub: "6개 영역 전 범위 개념 완성", meta: ["3.2 ~ 6.30", "24회"],
         badge: "[개강 예정]", tone: "badge-gray", price: "사전 상담 후 개별 안내", priceNote: "개강 일정이 확정되면 함께 공지", cta: "수강 신청" },
-      { id: "teuk", name: "수능특강 집중반", sub: "수특 연계 10문항 정복", meta: ["7.6 개강", "12강"],
+      { id: "teuk", name: "수능특강 집중반", sub: "수특 연계 10문항 정복", meta: ["7.6 개강", "12회"],
         badge: "[개강 예정]", tone: "badge-gray", price: "사전 상담 후 개별 안내", priceNote: "개강 일정이 확정되면 함께 공지", cta: "수강 신청" },
       { id: "clinic2", name: "1:1 질의·클리닉", sub: "질문·첨삭 개별 진행", meta: ["상시 접수", "학생별 개별 오픈"],
         badge: "수강 중", tone: "badge-blue", price: "수강 중인 클래스", priceNote: "질문은 질문방·카톡으로 남겨 주세요", cta: "강의실 가기", act: "go-class" }
@@ -1573,7 +1609,7 @@ window.CONFIG = {
     var p = c.total ? pct(c.current, c.total) : 0;
     var cur = c.hw.filter(function (h) { return !h.past; });
     var todo = cur.filter(function (h) { return h.status === "todo"; }).length;
-    var foot = '<div class="hc-foot"><span><b>' + c.current + ' / ' + c.total + '강</b> 진행</span>' +
+    var foot = '<div class="hc-foot"><span><b>' + c.current + ' / ' + c.total + '회</b> 진행</span>' +
       '<span class="hc-bar"><i style="width:' + p + '%"></i></span>' +
       '<span>' + (todo ? "숙제 " + todo + "개 미제출" : (cur.length ? "숙제 완료" : "숙제 없음")) + '</span></div>';
 
@@ -1607,11 +1643,11 @@ window.CONFIG = {
       '</div>' +
       '<div class="hc-main">' +
         '<h3 class="hc-title">' + esc(c.nextLabel || "다음 예정 수업") + '</h3>' +
-        '<p class="hc-meta">' + (c.next ? c.next.no + '강 · ' + esc(c.next.title) : esc(c.sub)) + ' · ' + (c.minutes || 100) + '분</p>' +
+        '<p class="hc-meta">' + (c.next ? c.next.no + '회 · ' + esc(c.next.title) : esc(c.sub)) + ' · ' + (c.minutes || 100) + '분</p>' +
       '</div>' +
       '<div class="hc-actions">' +
         '<button class="btn btn-primary" type="button" data-open="' + c.id + '">클래스 들어가기 <svg width="13" height="13"><use href="#i-arrow"/></svg></button>' +
-        ((c.vod && c.vod[0]) ? '<button class="btn btn-ghost" type="button" data-play="' + c.vod[0].id + '">' + c.vod[0].no + '강 다시보기</button>' : '') +
+        ((c.vod && c.vod[0]) ? '<button class="btn btn-ghost" type="button" data-play="' + c.vod[0].id + '">' + c.vod[0].no + '회 다시보기</button>' : '') +
       '</div>' + foot +
     '</article>';
   }
@@ -1658,15 +1694,15 @@ window.CONFIG = {
   }
   function replayRowHTML(v) {
     return '<div class="row replay-row">' +
-      '<button class="thumb" type="button" data-play="' + v.id + '" aria-label="' + v.no + '강 재생"><svg width="20" height="20"><use href="#i-play"/></svg><span class="dur">' + esc(v.dur) + '</span>' +
+      '<button class="thumb" type="button" data-play="' + v.id + '" aria-label="' + v.no + '회 다시보기"><svg width="20" height="20"><use href="#i-play"/></svg><span class="dur">' + esc(v.dur) + '</span>' +
         (v.left > 0 && v.left < 100 ? '<i class="pbar" style="width:' + v.left + '%"></i>' : '') + '</button>' +
-      '<div class="row-main"><h3>' + v.no + '강 · ' + esc(v.title) + '</h3>' +
+      '<div class="row-main"><h3>' + v.no + '회 · ' + esc(v.title) + '</h3>' +
         '<p>' + esc(v.unit) + ' <span class="sep"></span> ' + esc(v.date) + ' <span class="sep"></span> ' + esc(v.dur) +
         (v.left > 0 && v.left < 100 ? ' <span class="sep"></span> <b style="color:#2563EB;font-weight:600">' + v.left + '% 시청</b>' : '') +
         '</p></div>' +
       '<span class="row-act">' +
-        '<button class="icon-action" type="button" data-play="' + v.id + '" aria-label="' + v.no + '강 재생"><svg width="18" height="18"><use href="#i-play"/></svg></button>' +
-        '<button class="check" type="button" data-review="' + v.id + '" aria-pressed="' + (v.done ? "true" : "false") + '" aria-label="' + v.no + '강 복습 완료">' +
+        '<button class="icon-action" type="button" data-play="' + v.id + '" aria-label="' + v.no + '회 다시보기"><svg width="18" height="18"><use href="#i-play"/></svg></button>' +
+        '<button class="check" type="button" data-review="' + v.id + '" aria-pressed="' + (v.done ? "true" : "false") + '" aria-label="' + v.no + '회 복습 완료">' +
           '<span class="box"><svg width="10" height="10"><use href="#i-check"/></svg></span>' + (v.done ? "완료" : "복습 전") + '</button>' +
       '</span></div>';
   }
@@ -1721,7 +1757,7 @@ window.CONFIG = {
       '<span class="sched">' + esc(c.schedule) + '</span>';
     $("#clsBadges").innerHTML =
       '<span class="badge badge-blue"><i class="b-dot"></i> ' + esc(c.state) + '</span>' +
-      '<span class="badge badge-line">' + (c.total ? '전 ' + c.total + '강 중 ' + c.current + '강 진행' : '학생별 개별 진행') + '</span>';
+      '<span class="badge badge-line">' + (c.total ? '전 ' + c.total + '회 중 ' + c.current + '회 진행' : '학생별 개별 진행') + '</span>';
 
     var curHw = c.hw.filter(function (h) { return !h.past; });
     var pastHw = c.hw.filter(function (h) { return h.past; });
@@ -1733,7 +1769,7 @@ window.CONFIG = {
       '<div class="stat"><div class="k"><svg width="13" height="13"><use href="#i-check-sq"/></svg> 진행</div>' +
         '<div class="v">' + c.current + '<small>/' + c.total + '</small></div><div class="d">' + (c.total ? Math.round(c.current / c.total * 100) + '% 진행' : '회차 준비 중') + '</div></div>' +
       '<div class="stat"><div class="k"><svg width="13" height="13"><use href="#i-play"/></svg> 복습</div>' +
-        '<div class="v">' + (c.vod.length ? vodPct : 0) + '<small>%</small></div><div class="d">' + c.vod.length + '강 중 ' + vodDone + '강 완료</div></div>' +
+        '<div class="v">' + (c.vod.length ? vodPct : 0) + '<small>%</small></div><div class="d">' + c.vod.length + '회 중 ' + vodDone + '회 완료</div></div>' +
       '<div class="stat"><div class="k"><svg width="13" height="13"><use href="#i-clip"/></svg> 숙제</div>' +
         '<div class="v">' + hw.done + '<small>/' + hw.total + '</small></div><div class="d">' + (hw.total ? hw.pct + '% 제출·확인' : '이번 주 숙제 없음') + '</div></div>';
 
@@ -1744,7 +1780,7 @@ window.CONFIG = {
           '<div class="live-ico"><svg width="26" height="26"><use href="#i-video"/></svg></div>' +
           '<div class="live-body"><div class="row1">' +
             '<span class="badge badge-blue"><i class="b-dot"></i> 실시간 강의</span>' +
-            '<span class="badge badge-line">' + c.live.no + '강 / 전 ' + c.total + '강</span>' +
+            '<span class="badge badge-line">' + c.live.no + '회 / 전 ' + c.total + '회</span>' +
             '<span class="badge badge-gray">' + esc(c.live.unit) + '</span></div>' +
             '<h3>' + esc(c.live.title) + '</h3>' +
             '<p class="meta"><b>' + esc(liveWhen(c.live)) + '</b> · 이연화 선생님</p></div>' +
@@ -1756,7 +1792,7 @@ window.CONFIG = {
           '<div class="live-ico"><svg width="26" height="26"><use href="#i-video"/></svg></div>' +
           '<div class="live-body"><div class="row1">' +
             '<span class="badge badge-gray">다음 예정 수업</span>' +
-            (c.live.no ? '<span class="badge badge-line">' + c.live.no + '강 / 전 ' + c.total + '강</span>' : '') +
+            (c.live.no ? '<span class="badge badge-line">' + c.live.no + '회 / 전 ' + c.total + '회</span>' : '') +
             (c.live.unit ? '<span class="badge badge-blue">' + esc(c.live.unit) + '</span>' : '') + '</div>' +
             '<h3>' + esc(c.live.title) + '</h3>' +
             '<p class="meta"><b>' + esc(liveWhen(c.live)) + '</b> · 이연화 선생님</p></div>' +
@@ -1790,7 +1826,7 @@ window.CONFIG = {
 
     // ④ 다시보기
     $("#clsReplayHint").textContent = c.vod.length
-      ? c.vod.length + '강 중 ' + vodDone + '강 복습 완료 · ' + vodPct + '%'
+      ? c.vod.length + '회 중 ' + vodDone + '회 복습 완료 · ' + vodPct + '%'
       : '아직 공개된 영상이 없어요';
     $("#clsReplay").innerHTML = c.vod.length
       ? c.vod.map(replayRowHTML).join("")
@@ -1855,7 +1891,7 @@ window.CONFIG = {
     faqInput.value = ""; state.faqQuery = ""; $("#faqSearchWrap").classList.remove("has"); renderFaq(); faqInput.focus();
   });
 
-  /* ══════════ 강의·교재 ══════════ */
+  /* ══════════ 수강·교재 안내 ══════════ */
   function prodHTML(p, kind) {
     return '<article class="prod">' +
       '<div>' +
@@ -1885,10 +1921,10 @@ window.CONFIG = {
     if (!p) return;
     var kindLabel = kind === "class" ? "수강" : kind === "book" ? "교재" : "VOD";
     $("#storeTitle").textContent = p.name;
-    $("#storeSub").textContent = kindLabel + " 안내 · 아임웹 비노출 결제 페이지로 연결됩니다.";
+    $("#storeSub").textContent = kindLabel + " 안내 · 공식 홈페이지(yeonteacher.kr) 결제 페이지로 연결됩니다.";
     $("#storeBody").innerHTML =
       '<div class="note note-blue"><svg width="15" height="15"><use href="#i-info"/></svg>' +
-        '<span><b>아임웹 비노출 결제 페이지(yeonteacher.kr)로 연결됩니다.</b><br>강의실 안에서 결제까지 이어지고, 결제가 끝나면 이 클래스·교재가 내 강의실에 열려요.</span></div>' +
+        '<span><b>공식 홈페이지(yeonteacher.kr) 결제 페이지로 연결됩니다.</b><br>강의실 안에서 결제까지 이어지고, 결제가 끝나면 이 클래스·교재가 내 강의실에 열려요.</span></div>' +
       '<div class="kv">' +
         '<div class="kv-row"><span class="k">상품</span><span class="v">' + esc(p.name) + '</span></div>' +
         '<div class="kv-row"><span class="k">구분</span><span class="v">' + esc(p.meta.join(" · ")) + '</span></div>' +
@@ -2210,7 +2246,7 @@ window.CONFIG = {
       if (window.__bg) window.__bg.review(v.id, v.done);
       renderClass();
       var dn = c2.vod.filter(function (x) { return x.done; }).length;
-      toast(v.done ? v.no + "강 복습 완료! 복습 완주율 " + pct(dn, c2.vod.length) + "%" : v.no + "강 복습 완료를 해제했어요.");
+      toast(v.done ? v.no + "회 복습 완료! 복습 완주율 " + pct(dn, c2.vod.length) + "%" : v.no + "회 복습 완료를 해제했어요.");
       return;
     }
     var pl = t.closest("[data-play]");
@@ -2220,7 +2256,7 @@ window.CONFIG = {
         cc.vod.forEach(function (v) { if (v.id === pl.dataset.play) item = v; });
       });
       if (item) {
-        $("#playName").textContent = (item.no ? item.no + "강 · " : "") + item.title;
+        $("#playName").textContent = (item.no ? item.no + "회 · " : "") + item.title;
         $("#playSub").textContent = item.unit + " · " + item.dur;
         var ps = document.getElementById("sheetPlay");
         if (ps) ps.dataset.url = item.url || "";
@@ -2250,7 +2286,7 @@ window.CONFIG = {
     if (mt) {
       var cc = classById(mt.dataset.meet);
       if (cc) {
-        $("#meetClass").textContent = cc.name + (cc.live && cc.live.no ? " · " + cc.live.no + "강" : "");
+        $("#meetClass").textContent = cc.name + (cc.live && cc.live.no ? " · " + cc.live.no + "회" : "");
         $("#meetWhen").textContent = liveWhen(cc.live) + " · 이연화 선생님";
         var ms = document.getElementById("sheetMeet");
         if (ms) ms.dataset.url = (cc.live && cc.live.url) || "";
@@ -2327,8 +2363,8 @@ window.CONFIG = {
   if (sideAcct) sideAcct.addEventListener("click", openAccount);
 
   /* ══════════ 보기 전환 ══════════ */
-  var VIEW_TITLE = { home: "내 강의실", class: "내 강의실", qna: "질문방", store: "강의·교재" };
-  var TAB_OF = { home: "home", class: "home", qna: "qna", store: "store" };
+  var VIEW_TITLE = { home: "내 강의실", class: "내 강의실", qna: "질문방", enroll: "수강신청", books: "교재·N제" };
+  var TAB_OF = { home: "home", class: "home", qna: "qna", enroll: "enroll", books: "books" };
   function showView(name) {
     if (!VIEW_TITLE[name]) name = "home";
     if (name === "class" && !classById(state.classId)) state.classId = (CLASSES[0] || {}).id;
@@ -2384,7 +2420,7 @@ window.CONFIG = {
 /* ═══════════════════════════════════════════════════════════════════
    연티 클래스룸 · 앱 레이어
    - 구글 로그인 / 수강권 판정 / Supabase 데이터 로드
-   - 수강생 3탭 데이터 어댑터 (엔진이 그리는 모양으로 변환)
+   - 수강생 4탭 데이터 어댑터 (엔진이 그리는 모양으로 변환)
    - 선생님 관리자 페이지
    ═══════════════════════════════════════════════════════════════════ */
 (function () {
@@ -2701,7 +2737,7 @@ window.CONFIG = {
         var fresh = born ? (Date.now() - born.getTime()) < 3 * 864e5 : false;
         var lesson = ls.filter(function (l) { return l.id === m.lesson_id; })[0];
         return {
-          id: m.id, round: m.round_label || (lesson ? lesson.no + "강" : "공통"), type: m.kind || "note",
+          id: m.id, round: m.round_label || (lesson ? lesson.no + "회" : "공통"), type: m.kind || "note",
           title: m.title, path: m.storage_path,
           meta: [m.pages ? m.pages + "쪽" : "", fmtBytes(m.size_bytes), fmtMD((m.created_at || "").slice(0, 10))].filter(Boolean).join(" · "),
           fresh: fresh
@@ -2858,7 +2894,7 @@ window.CONFIG = {
     var sideRole = $("#sideRole"); if (sideRole) sideRole.textContent = nonEnrolled ? "수강생 · 등록 대기" : "수강생 · 2028 응시";
     document.body.classList.toggle("is-nonenrolled", nonEnrolled);
 
-    // 미수강: 내 강의실만 잠그고 질문방·강의·교재는 그대로 연다
+    // 미수강: 내 강의실만 잠그고 질문방·수강신청·교재는 그대로 연다
     var noClassBox = $("#homeHero");
     if (noClassBox) noClassBox.hidden = false;
     $("#secHomework").hidden = nonEnrolled;
@@ -2899,13 +2935,16 @@ window.CONFIG = {
     box.innerHTML = '<article class="hero-empty">' +
       '<div class="he-ico"><svg width="24" height="24"><use href="#i-book"/></svg></div>' +
       '<h3>아직 배정된 수업이 없어요</h3>' +
-      '<p>수강 등록한 구글 이메일이 맞는지 확인하거나, <b>강의·교재</b> 탭에서 안내를 확인해 주세요. 질문방 FAQ는 지금도 볼 수 있어요.</p>' +
+      '<p>수강 등록한 구글 이메일이 맞는지 확인하거나, <b>수강신청</b>에서 클래스를, <b>교재·N제</b>에서 교재를 살펴보세요. 질문방 FAQ는 지금도 볼 수 있어요.</p>' +
       '<div class="he-actions" id="noClassExtra"></div></article>';
     var books = (DATA.books || []).filter(function (b) { return b.catalog_items; });
     var extra = $("#noClassExtra");
     if (!extra) return;
+    var more = '<div class="he-actions" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-ghost" type="button" data-tab="enroll" style="flex:1;min-width:140px">수강신청 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>' +
+      '<button class="btn btn-ghost" type="button" data-tab="books" style="flex:1;min-width:140px">교재·N제 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button></div>';
     if (!books.length) {
-      extra.innerHTML = '<button class="btn btn-ghost btn-block" type="button" data-tab="store">강의·교재 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>';
+      extra.innerHTML = more;
       return;
     }
     extra.innerHTML = books.map(function (b) {
@@ -2913,8 +2952,8 @@ window.CONFIG = {
       return '<button class="book-dl" type="button" data-book="' + esc(it.id) + '">' +
         '<span class="bd-ico"><svg width="19" height="19"><use href="#i-book"/></svg></span>' +
         '<span class="bd-txt"><h4>' + esc(it.name) + '</h4><p>' + esc(it.subtitle || "구매하신 교재를 내려받을 수 있어요") + '</p></span>' +
-        '<span class="badge badge-green" style="height:23px">내 교재</span></button>';
-    }).join("") + '<button class="btn btn-ghost btn-block" type="button" data-tab="store">강의·교재 보기 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>';
+        '<span class="badge badge-green" style="height:23px">' + (isNje(it) ? "내 N제" : "내 교재") + '</span></button>';
+    }).join("") + more;
   }
 
   function renderBooksCard() {
@@ -2923,13 +2962,13 @@ window.CONFIG = {
     var books = (DATA.books || []).filter(function (b) { return b.catalog_items; });
     if (!books.length || !DATA.classes.length) { box.hidden = true; return; }
     box.hidden = false;
-    box.innerHTML = '<div class="section-head"><h2><svg width="17" height="17"><use href="#i-book"/></svg> 내 교재</h2>' +
+    box.innerHTML = '<div class="section-head"><h2><svg width="17" height="17"><use href="#i-book"/></svg> 내 교재·N제</h2>' +
       '<span class="sm-hint">구매한 교재 PDF를 내려받을 수 있어요</span></div>' + books.map(function (b) {
       var it = b.catalog_items;
       return '<button class="book-dl" type="button" data-book="' + esc(it.id) + '">' +
         '<span class="bd-ico"><svg width="19" height="19"><use href="#i-book"/></svg></span>' +
-        '<span class="bd-txt"><h4>' + esc(it.name) + '</h4><p>내 교재 PDF · 눌러서 내려받기</p></span>' +
-        '<span class="badge badge-green" style="height:23px">내 교재</span></button>';
+        '<span class="bd-txt"><h4>' + esc(it.name) + '</h4><p>' + (isNje(it) ? "내 N제" : "내 교재") + ' PDF · 눌러서 내려받기</p></span>' +
+        '<span class="badge badge-green" style="height:23px">내려받기</span></button>';
     }).join("");
   }
 
@@ -2942,7 +2981,7 @@ window.CONFIG = {
       (c.hw || []).forEach(function (h) {
         if (h.status === "checked") list.push({ ico: "i-check-sq", t: "숙제 '" + h.title + "' 확인 완료", s: h.checkedAt || "확인 완료" });
       });
-      if (c.live && c.live.day) list.push({ ico: "i-video", t: "오늘 " + c.live.start + " 수업이 있어요", s: c.name + " · " + c.live.no + "강" });
+      if (c.live && c.live.day) list.push({ ico: "i-video", t: "오늘 " + c.live.start + " 수업이 있어요", s: c.name + " · " + c.live.no + "회" });
     });
     NOTI = list.slice(0, 6);
     var dot = $("#bellDot"), area = $("#notiBody");
@@ -2955,9 +2994,25 @@ window.CONFIG = {
     }
   }
 
-  /* ── 강의·교재 카탈로그 ── */
+  /* ── 수강·교재 카탈로그 ── */
   function catalogOf(kind) {
     return (DATA && DATA.catalog || []).filter(function (c) { return c.kind === kind; });
+  }
+  /* 교재 / N제 구분 — 이름·뱃지·메타에 ‘N제’가 있으면 N제 */
+  function isNje(p) {
+    if (!p) return false;
+    var hay = String(p.name || "") + " " + String(p.badge || "") + " " + (p.meta || []).join(" ");
+    return /n\s*제/i.test(hay);
+  }
+  function kindLabelOf(p) {
+    if (!p) return "";
+    if (p.kind === "class") return "수강 클래스";
+    if (p.kind === "vod") return "VOD 인강";
+    return isNje(p) ? "N제" : "교재";
+  }
+  /* 관리자 저장용 내부 표식(N제)은 카드 메타에서 숨긴다 */
+  function metaBits(p) {
+    return (p.meta || []).filter(function (m) { return !/^n\s*제$/i.test(String(m).trim()); });
   }
   function enrolledClassIds() { return (DATA.classes || []).map(function (c) { return c.id; }); }
   function hasBook(id) { return (DATA.books || []).some(function (b) { return b.catalog_item_id === id; }); }
@@ -2965,12 +3020,12 @@ window.CONFIG = {
   function prodHTML(p) {
     var enrolled = p.class_id && enrolledClassIds().indexOf(p.class_id) >= 0;
     var owned = p.kind === "book" && hasBook(p.id);
-    var badge = owned ? "내 교재" : enrolled ? "수강 중" : (p.badge || "");
+    var badge = owned ? (isNje(p) ? "내 N제" : "내 교재") : enrolled ? "수강 중" : (p.badge || "");
     var tone = owned || enrolled ? "badge-blue" : "badge-gray";
-    var price = owned ? "내 교재" : enrolled ? "수강 중인 클래스" : (p.price_text || "사전 상담 후 개별 안내");
-    var note = owned ? "내 강의실에서 내려받을 수 있어요" : enrolled ? "내 강의실에서 이어서 들을 수 있어요" : (p.price_note || "");
+    var price = owned ? (isNje(p) ? "내 N제" : "내 교재") : enrolled ? "수강 중인 클래스" : (p.price_text || "사전 상담 후 개별 안내");
+    var note = owned ? "이 화면에서 바로 내려받을 수 있어요" : enrolled ? "내 강의실에서 이어서 들을 수 있어요" : (p.price_note || "");
     var cta = owned ? "내려받기" : enrolled ? "강의실 가기" : (p.cta_label || "신청 안내");
-    var meta = (p.meta || []).map(function (m) { return '<span>' + esc(m) + '</span>'; }).join('<span class="sep"></span>');
+    var meta = metaBits(p).map(function (m) { return '<span>' + esc(m) + '</span>'; }).join('<span class="sep"></span>');
     return '<article class="prod"><div>' +
       (badge ? '<span class="badge ' + tone + '">' + esc(badge) + '</span>' : '') +
       '<h3>' + esc(p.name) + '</h3><p class="prod-sub">' + esc(p.subtitle || "") + '</p></div>' +
@@ -2980,14 +3035,34 @@ window.CONFIG = {
       '</div></article>';
   }
 
+  /* 내가 구매한 교재·N제 — 교재·N제 탭 맨 위 */
+  function renderMyBooks() {
+    var box = $("#myBooks"), sec = $("#myBooksSec");
+    if (!box || !sec) return;
+    var owned = ((DATA && DATA.books) || []).filter(function (b) { return b.catalog_items; });
+    sec.hidden = !owned.length;
+    box.innerHTML = owned.map(function (bt) {
+      var it = bt.catalog_items;
+      return '<button class="book-dl" type="button" data-book="' + esc(it.id) + '">' +
+        '<span class="bd-ico"><svg width="19" height="19"><use href="#i-download"/></svg></span>' +
+        '<span class="bd-txt"><h4>' + esc(it.name) + '</h4><p>' + (isNje(it) ? "내 N제" : "내 교재") + ' · 눌러서 PDF 내려받기</p></span>' +
+        '<span class="badge badge-green" style="height:23px">내려받기</span></button>';
+    }).join("");
+  }
+
   function renderCatalog() {
     if (!DATA) return;
-    var c = catalogOf("class"), b = catalogOf("book"), v = catalogOf("vod");
-    var boxC = $("#storeClasses"), boxB = $("#storeBooks"), boxV = $("#storeVod");
-    if (boxC) boxC.innerHTML = c.length ? c.map(prodHTML).join("") : '<div class="empty"><p>등록된 수강 상품이 없어요.</p></div>';
-    if (boxB) boxB.innerHTML = b.length ? b.map(prodHTML).join("") : '<div class="empty"><p>등록된 교재가 없어요.</p></div>';
-    if (boxV) boxV.innerHTML = v.length ? v.map(prodHTML).join("") : '<div class="empty"><p>등록된 인강이 없어요.</p></div>';
-    $$("[data-kind-sec]").forEach(function (s) { s.hidden = !$("#" + s.dataset.kindSec + " > *"); });
+    var cls = catalogOf("class"), vod = catalogOf("vod");
+    var books = catalogOf("book").filter(function (x) { return !isNje(x); });
+    var nje = catalogOf("book").filter(isNje);
+    var boxC = $("#storeClasses"), boxV = $("#storeVod"), boxB = $("#storeBooks"), boxN = $("#storeNje");
+    if (boxC) boxC.innerHTML = cls.length ? cls.map(prodHTML).join("") : '<div class="empty"><p>지금 신청할 수 있는 수강 클래스가 없어요.</p></div>';
+    if (boxV) boxV.innerHTML = vod.length ? vod.map(prodHTML).join("") : '<div class="empty"><p>준비 중인 VOD 인강이 없어요.</p></div>';
+    if (boxB) boxB.innerHTML = books.length ? books.map(prodHTML).join("") : '<div class="empty"><p>등록된 교재가 없어요.</p></div>';
+    if (boxN) boxN.innerHTML = nje.length ? nje.map(prodHTML).join("") : '<div class="empty"><p>등록된 N제가 없어요.</p></div>';
+    var secN = $("#njeSec");
+    if (secN) secN.hidden = !nje.length;
+    renderMyBooks();
   }
 
   function openCatalog(id) {
@@ -2996,10 +3071,10 @@ window.CONFIG = {
     var owned = p.kind === "book" && hasBook(id);
     var enrolled = p.class_id && enrolledClassIds().indexOf(p.class_id) >= 0;
     $("#storeTitle").textContent = p.name;
-    $("#storeSub").textContent = p.kind === "class" ? "수강 안내" : p.kind === "book" ? "교재 안내" : "인강 안내";
+    $("#storeSub").textContent = kindLabelOf(p) + " 안내";
     var body = "";
     if (owned) {
-      body = '<div class="note note-blue"><svg width="15" height="15"><use href="#i-info"/></svg><span><b>구매(열람권)가 확인된 교재예요.</b><br>아래 버튼으로 PDF를 열 수 있어요.</span></div>';
+      body = '<div class="note note-blue"><svg width="15" height="15"><use href="#i-info"/></svg><span><b>구매(열람권)가 확인된 ' + (isNje(p) ? "N제" : "교재") + '예요.</b><br>아래 버튼으로 PDF를 열 수 있어요.</span></div>';
     } else if (enrolled) {
       body = '<div class="note note-blue"><svg width="15" height="15"><use href="#i-info"/></svg><span><b>수강 중인 클래스예요.</b><br>내 강의실에서 수업·자료·숙제를 확인하세요.</span></div>';
     } else {
@@ -3007,12 +3082,13 @@ window.CONFIG = {
     }
     body += '<div class="kv">' +
       '<div class="kv-row"><span class="k">상품</span><span class="v">' + esc(p.name) + '</span></div>' +
-      '<div class="kv-row"><span class="k">구분</span><span class="v">' + esc((p.meta || []).join(" · ") || "-") + '</span></div>' +
+      '<div class="kv-row"><span class="k">구분</span><span class="v">' + esc(metaBits(p).join(" · ") || "-") + '</span></div>' +
       '<div class="kv-row"><span class="k">금액</span><span class="v">' + esc(owned ? "구매 완료" : (p.price_text || "사전 상담 후 개별 안내")) + '</span></div>' +
       '</div>' + (p.price_note ? '<p class="ad-note">' + esc(p.price_note) + '</p>' : '');
     $("#storeBody").innerHTML = body;
     var foot = "";
-    if (owned && p.book_path) foot = '<button class="btn btn-primary btn-block" type="button" data-book="' + esc(p.id) + '"><svg width="16" height="16"><use href="#i-download"/></svg> 교재 PDF 내려받기</button>';
+    if (owned && p.book_path) foot = '<button class="btn btn-primary btn-block" type="button" data-book="' + esc(p.id) + '"><svg width="16" height="16"><use href="#i-download"/></svg> ' + (isNje(p) ? "N제" : "교재") + ' PDF 내려받기</button>';
+    else if (owned) foot = '<div class="note"><svg width="15" height="15"><use href="#i-info"/></svg><span>구매는 확인됐지만 파일이 아직 올라오지 않았어요. 카카오채널로 알려 주시면 바로 보내 드릴게요.</span></div>';
     else if (enrolled) foot = '<button class="btn btn-primary btn-block" type="button" data-open="' + esc(p.class_id) + '">강의실 가기</button>';
     if (p.pay_url) foot += '<a class="btn btn-' + (owned || enrolled ? "ghost" : "primary") + ' btn-block" href="' + esc(p.pay_url) + '" target="_blank" rel="noopener noreferrer">결제 페이지로 이동</a>';
     if (!p.pay_url && !owned && !enrolled) foot += '<a class="btn btn-primary btn-block" href="' + KAKAO + '" target="_blank" rel="noopener noreferrer">카카오채널로 문의</a>';
@@ -3140,12 +3216,49 @@ window.CONFIG = {
       });
   }
 
+  /* 로그아웃 — 열린 모달을 먼저 닫고, Supabase 응답과 상관없이 즉시 로그인 화면으로 보낸다 */
   function logout() {
-    if (MODE === "preview") { flash("미리보기 모드 — 새로고침하면 처음 화면으로 돌아갑니다."); return; }
-    sb.auth.signOut().then(function () {
-      session = null; profile = null; DATA = null;
-      screen("screenLogin");
-    });
+    // ① 열려 있는 시트·모달을 즉시 모두 닫는다 (모달이 화면을 덮어 ‘안 눌린 것처럼’ 보이던 문제 방지)
+    try {
+      $$(".sheet").forEach(function (s) { s.classList.remove("on"); });
+      var ov = document.getElementById("overlay");
+      if (ov) ov.classList.remove("on");
+      document.body.style.overflow = "";
+    } catch (e) { /* noop */ }
+
+    // ② 화면 상태 초기화 + 로그인 화면 전환
+    session = null; profile = null; DATA = null; isAdmin = false;
+    var back = document.getElementById("backAdmin"); if (back) back.hidden = true;
+    var acct = document.getElementById("acctBody"); if (acct) acct.innerHTML = "";
+    screen("screenLogin");
+    gateError("");
+    btnBusy(document.getElementById("btnGoogle"), false);
+    try { window.scrollTo({ top: 0, behavior: "auto" }); } catch (e) { /* noop */ }
+
+    // ③ 저장된 세션 토큰 제거 (sb- 로 시작하는 Supabase 키, 남아 있으면 새로고침 때 다시 로그인됨)
+    try {
+      Object.keys(localStorage).forEach(function (k) {
+        if (k.indexOf("sb-") === 0 || k.indexOf("-auth-token") >= 0) localStorage.removeItem(k);
+      });
+      Object.keys(sessionStorage).forEach(function (k) {
+        if (k.indexOf("sb-") === 0) sessionStorage.removeItem(k);
+      });
+    } catch (e) { /* 사생활 보호 모드 등 */ }
+
+    // ④ URL 에 남은 #access_token·#error 제거 (새로고침 시 재로그인·오류 반복 방지)
+    if (location.hash) {
+      try { history.replaceState(null, "", location.pathname + location.search); }
+      catch (e) { location.hash = ""; }
+    }
+
+    // ⑤ Supabase 세션 종료 — 실패·지연되어도 위에서 이미 로그아웃된 상태는 유지된다
+    if (MODE === "preview") return;
+    try {
+      if (sb && sb.auth) {
+        var pr = sb.auth.signOut({ scope: "local" });
+        if (pr && pr.catch) pr.catch(function () {});
+      }
+    } catch (e) { /* noop */ }
   }
 
   /* ── 온보딩 ── */
@@ -3355,7 +3468,7 @@ window.CONFIG = {
     var ls = AD.lessons.filter(function (l) { return l.class_id === cls; }).sort(function (a, b) { return a.no - b.no; });
     var rowsHtml = ls.map(function (l) {
       var isToday = String(l.lesson_date).slice(0, 10) === todayStr();
-      return '<tr><td class="nowrap"><b>' + l.no + '강</b></td>' +
+      return '<tr><td class="nowrap"><b>' + l.no + '회</b></td>' +
         '<td class="nowrap">' + esc(fmtMDW(l.lesson_date)) + (isToday ? ' <span class="ad-pill on">오늘</span>' : "") + (l.is_cancelled ? ' <span class="ad-pill off">휴강</span>' : "") + '</td>' +
         '<td>' + esc(l.title) + '<div class="em">' + esc(l.unit || "") + '</div></td>' +
         '<td class="nowrap">' + esc(fmtHM(l.start_time) || "—") + '</td>' +
@@ -3368,7 +3481,7 @@ window.CONFIG = {
     var nextNo = ls.length ? Math.max.apply(null, ls.map(function (x) { return x.no; })) + 1 : 1;
     return '<div class="ad-head"><div><h1>회차 · 수업 링크</h1><p>회차마다 날짜·시간·구글 밋 링크·다시보기 링크를 등록합니다. 오늘 날짜 회차가 있으면 학생 홈에 ‘오늘 수업’으로 강조됩니다.</p></div></div>' +
       '<div class="ad-toolbar"><select id="adLessonClass">' + opts(AD.classes, cls, "id", function (c) { return c.name; }, AD.classes.length ? "" : "클래스 없음") + '</select></div>' +
-      (AD.classes.length ? '<div class="ad-sec"><div class="ad-sec-head"><h2>' + (l.id ? l.no + "강 수정" : "회차 추가") + '</h2></div><div class="ad-sec-body">' +
+      (AD.classes.length ? '<div class="ad-sec"><div class="ad-sec-head"><h2>' + (l.id ? l.no + "회 수정" : "회차 추가") + '</h2></div><div class="ad-sec-body">' +
       '<form id="adLessonForm"><input type="hidden" id="alId" value="' + esc(l.id || "") + '"><input type="hidden" id="alClass" value="' + esc(cls || "") + '">' +
       '<div class="form-row three">' +
       '<label class="field"><span class="k">회차</span><input type="number" id="alNo" value="' + (l.no || nextNo) + '" min="1" required></label>' +
@@ -3400,7 +3513,7 @@ window.CONFIG = {
     var rowsHtml = list.map(function (m) {
       var l = AD.lessons.filter(function (x) { return x.id === m.lesson_id; })[0];
       return '<tr><td>' + esc(m.title) + '<div class="em">' + esc(m.storage_path) + '</div></td>' +
-        '<td class="nowrap">' + esc(m.round_label || (l ? l.no + "강" : "공통")) + '</td>' +
+        '<td class="nowrap">' + esc(m.round_label || (l ? l.no + "회" : "공통")) + '</td>' +
         '<td class="nowrap">' + esc({ note: "판서노트", law: "조문표", check: "확인학습", mock: "모의고사", report: "첨삭", plan: "계획", etc: "기타" }[m.kind] || m.kind) + '</td>' +
         '<td class="nowrap">' + esc(m.pages ? m.pages + "쪽" : "—") + '</td>' +
         '<td class="nowrap"><span class="ad-pill ' + (m.is_published ? "on" : "off") + '">' + (m.is_published ? "공개" : "숨김") + '</span></td>' +
@@ -3411,11 +3524,11 @@ window.CONFIG = {
       '<div class="ad-toolbar"><select id="adMatClass">' + opts(AD.classes, cls, "id", function (c) { return c.name; }) + '</select></div>' +
       (AD.classes.length ? '<div class="ad-sec"><div class="ad-sec-head"><h2>자료 PDF 업로드</h2><span class="sm-hint">최대 50MB · PDF</span></div><div class="ad-sec-body">' +
       '<form id="adMatForm"><input type="hidden" id="amClass" value="' + esc(cls || "") + '"><div class="form-row three">' +
-      '<label class="field"><span class="k">회차</span><select id="amLesson">' + opts(AD.lessons.filter(function (l) { return l.class_id === cls; }), "", "id", function (l) { return l.no + "강 · " + l.title; }, "공통 자료") + '</select></label>' +
+      '<label class="field"><span class="k">회차</span><select id="amLesson">' + opts(AD.lessons.filter(function (l) { return l.class_id === cls; }), "", "id", function (l) { return l.no + "회 · " + l.title; }, "공통 자료") + '</select></label>' +
       '<label class="field"><span class="k">구분</span><select id="amKind">' +
       opts([{ k: "note", v: "판서노트" }, { k: "law", v: "조문표" }, { k: "check", v: "확인학습" }, { k: "mock", v: "모의고사" }, { k: "report", v: "첨삭리포트" }, { k: "etc", v: "기타" }], "note", "k", function (o) { return o.v; }) + '</select></label>' +
       '<label class="field"><span class="k">쪽수 (선택)</span><input type="number" id="amPages" min="1" placeholder="18"></label></div>' +
-      '<label class="field" style="margin-top:12px"><span class="k">자료 제목</span><input type="text" id="amTitle" placeholder="03강 판서 노트 · 근로계약과 임금" required></label>' +
+      '<label class="field" style="margin-top:12px"><span class="k">자료 제목</span><input type="text" id="amTitle" placeholder="3회 판서 노트 · 근로계약과 임금" required></label>' +
       '<label class="field" style="margin-top:12px"><span class="k">PDF 파일</span><input type="file" id="amFile" accept="application/pdf" required style="height:auto;padding:10px 12px"></label>' +
       '<div class="form-actions"><button class="btn btn-primary btn-sm" type="submit">업로드하고 공개</button></div></form></div></div>' : "") +
       (AD.classes.length ? '<div class="ad-sec"><div class="ad-sec-head"><h2>자료 목록</h2><span class="sm-hint">' + list.length + '개</span></div>' +
@@ -3478,15 +3591,15 @@ window.CONFIG = {
   function quizForm() {
     if (!QDRAFT) QDRAFT = { class_id: AD.classes[0] ? AD.classes[0].id : "", lesson_id: "", round_label: "", title: "", minutes: 3, questions: [] };
     var d = QDRAFT;
-    var lessonOpts = opts(AD.lessons.filter(function (l) { return l.class_id === d.class_id; }), d.lesson_id, "id", function (l) { return l.no + "강 · " + l.title; }, "회차 선택 안 함");
+    var lessonOpts = opts(AD.lessons.filter(function (l) { return l.class_id === d.class_id; }), d.lesson_id, "id", function (l) { return l.no + "회 · " + l.title; }, "회차 선택 안 함");
     var builders = d.questions.map(function (q, i) { return qBuilder(q, i); }).join("");
     return '<form id="adQuizForm"><div class="form-row three">' +
       '<label class="field"><span class="k">클래스</span><select id="aqClass">' + opts(AD.classes, d.class_id, "id", function (c) { return c.name; }) + '</select></label>' +
       '<label class="field"><span class="k">회차</span><select id="aqLesson">' + lessonOpts + '</select></label>' +
       '<label class="field"><span class="k">제한 시간(분)</span><input type="number" id="aqMinutes" min="1" value="' + (d.minutes || 3) + '"></label></div>' +
       '<div class="form-row two" style="margin-top:12px">' +
-      '<label class="field"><span class="k">회차 표기</span><input type="text" id="aqRound" value="' + esc(d.round_label) + '" placeholder="03강"></label>' +
-      '<label class="field"><span class="k">제목</span><input type="text" id="aqTitle" value="' + esc(d.title) + '" placeholder="03강 복습 쪽지시험"></label></div>' +
+      '<label class="field"><span class="k">회차 표기</span><input type="text" id="aqRound" value="' + esc(d.round_label) + '" placeholder="3회"></label>' +
+      '<label class="field"><span class="k">제목</span><input type="text" id="aqTitle" value="' + esc(d.title) + '" placeholder="3회 복습 쪽지시험"></label></div>' +
       '<div class="ad-sub">문항 <span id="aqCount">' + d.questions.length + '</span>개</div><div id="aqList">' + (builders || '<div class="ad-empty">아래 버튼으로 문항을 추가하세요.</div>') + '</div>' +
       '<div class="form-actions"><button class="btn btn-ghost btn-sm" type="button" data-act="addq">+ 문항 추가</button>' +
       '<button class="btn btn-primary btn-sm" type="button" data-act="savequiz">저장하고 공개</button>' +
@@ -3540,10 +3653,10 @@ window.CONFIG = {
       '<div class="ad-sec"><div class="ad-sec-head"><h2>숙제 내기</h2></div><div class="ad-sec-body">' +
       '<form id="adHwForm"><div class="form-row three">' +
       '<label class="field"><span class="k">클래스</span><select id="ahClass">' + opts(AD.classes, "", "id", function (c) { return c.name; }, "— 선택 —") + '</select></label>' +
-      '<label class="field"><span class="k">회차</span><select id="ahLesson">' + opts(AD.lessons, "", "id", function (l) { return l.no + "강 · " + l.title; }, "회차 없음") + '</select></label>' +
+      '<label class="field"><span class="k">회차</span><select id="ahLesson">' + opts(AD.lessons, "", "id", function (l) { return l.no + "회 · " + l.title; }, "회차 없음") + '</select></label>' +
       '<label class="field"><span class="k">마감</span><input type="datetime-local" id="ahDue"></label></div>' +
       '<div class="form-row two" style="margin-top:12px">' +
-      '<label class="field"><span class="k">숙제 제목</span><input type="text" id="ahTitle" placeholder="03강 판서 노트 정리" required></label>' +
+      '<label class="field"><span class="k">숙제 제목</span><input type="text" id="ahTitle" placeholder="3회 판서 노트 정리" required></label>' +
       '<label class="field"><span class="k">구분</span><input type="text" id="ahKind" value="복습" placeholder="복습 / 확인 / 첨삭"></label></div>' +
       '<label class="field" style="margin-top:12px"><span class="k">안내 문구</span><input type="text" id="ahDesc" placeholder="18쪽 · 빈칸 채워 사진으로 제출"></label>' +
       '<label class="field" style="margin-top:12px"><span class="k">문제지 PDF (선택)</span><input type="file" id="ahFile" accept="application/pdf" style="height:auto;padding:10px 12px"></label>' +
@@ -3584,28 +3697,30 @@ window.CONFIG = {
       (rowsHtml || '<tr><td colspan="4" class="ad-empty">등록된 FAQ가 없어요.</td></tr>') + '</tbody></table></div></div>';
   }
 
-  /* ── 5-8. 강의·교재 카탈로그 ── */
+  /* ── 5-8. 수강·교재 상품(카탈로그) ── */
   function adCatalog() {
     var l = (AD._editCatalog && AD.catalog.filter(function (x) { return x.id === AD._editCatalog; })[0]) || {};
+    var kindSel = l.id ? (l.kind === "book" ? (isNje(l) ? "nje" : "book") : l.kind) : "class";
     var list = AD.catalog.map(function (c) {
       return '<div class="ad-rowline"><div class="t"><h4>' + esc(c.name) + ' <span class="ad-pill ' + (c.is_public ? "on" : "off") + '">' + (c.is_public ? "공개" : "숨김") + '</span></h4>' +
-        '<p>' + esc(({ class: "수강", book: "교재", vod: "인강" }[c.kind] || c.kind) + " · " + (c.price_text || "가격 미정") + (c.pay_url ? " · 결제링크 있음" : "")) + '</p></div>' +
+        '<p>' + esc(kindLabelOf(c) + " · " + (c.price_text || "가격 미정") + (c.pay_url ? " · 결제링크 있음" : "")) + '</p></div>' +
         '<div class="acts"><button class="tbtn" data-act="editcatalog" data-id="' + c.id + '">수정</button>' +
         '<button class="tbtn red" data-act="delcatalog" data-id="' + c.id + '">삭제</button></div></div>';
     }).join("");
-    return '<div class="ad-head"><div><h1>강의·교재 카탈로그</h1><p>학생 화면 ‘강의·교재’ 탭에 보이는 상품입니다. 비수강생도 이 목록을 보고 결제 페이지로 갈 수 있어요.</p></div></div>' +
+    return '<div class="ad-head"><div><h1>수강·교재 상품</h1><p>학생 화면의 <b>수강신청</b> 탭에는 수강 클래스·VOD 인강이, <b>교재·N제</b> 탭에는 교재·N제가 나옵니다. 비수강생도 이 목록을 보고 결제 페이지로 갈 수 있어요.</p></div></div>' +
       '<div class="ad-sec"><div class="ad-sec-head"><h2>' + (l.id ? "상품 수정" : "상품 추가") + '</h2></div><div class="ad-sec-body">' +
       '<form id="adCatalogForm"><input type="hidden" id="aiId" value="' + esc(l.id || "") + '">' +
       '<div class="form-row three">' +
       '<label class="field"><span class="k">종류</span><select id="aiKind">' +
-      ['class', 'book', 'vod'].map(function (k) { return '<option value="' + k + '"' + (l.kind === k ? " selected" : "") + '>' + ({ class: "수강 클래스", book: "교재", vod: "인강" }[k]) + '</option>'; }).join("") + '</select></label>' +
+      ["class", "vod", "book", "nje"].map(function (k) { return '<option value="' + k + '"' + (kindSel === k ? " selected" : "") + '>' + ({ class: "수강 클래스", vod: "VOD 인강", book: "교재", nje: "N제" }[k]) + '</option>'; }).join("") + '</select>' +
+      '<span class="hint">수강 클래스·VOD 인강 → 수강신청 탭 / 교재·N제 → 교재·N제 탭</span></label>' +
       '<label class="field"><span class="k">상품명</span><input type="text" id="aiName" value="' + esc(l.name || "") + '" placeholder="1~2월 선행반" required></label>' +
       '<label class="field"><span class="k">뱃지</span><input type="text" id="aiBadge" value="' + esc(l.badge || "") + '" placeholder="모집 중 / 출간 예정"></label></div>' +
       '<label class="field" style="margin-top:12px"><span class="k">한 줄 소개</span><input type="text" id="aiSub" value="' + esc(l.subtitle || "") + '" placeholder="근로관계 법령 집중 · 7주"></label>' +
       '<div class="form-row two" style="margin-top:12px">' +
       '<label class="field"><span class="k">금액 표기</span><input type="text" id="aiPrice" value="' + esc(l.price_text || "") + '" placeholder="사전 상담 후 개별 안내"></label>' +
       '<label class="field"><span class="k">금액 비고</span><input type="text" id="aiPriceNote" value="' + esc(l.price_note || "") + '" placeholder="개강 일정 확정 후 공지"></label></div>' +
-      '<label class="field" style="margin-top:12px"><span class="k">메타 (쉼표 구분)</span><input type="text" id="aiMeta" value="' + esc((l.meta || []).join(", ")) + '" placeholder="1/7 ~ 2/25, 7주 · 매주 목"></label>' +
+      '<label class="field" style="margin-top:12px"><span class="k">메타 (쉼표 구분)</span><input type="text" id="aiMeta" value="' + esc(metaBits(l).join(", ")) + '" placeholder="1/7 ~ 2/25, 7주 · 매주 목"></label>' +
       '<div class="form-row two" style="margin-top:12px">' +
       '<label class="field"><span class="k">결제 페이지 링크</span><input type="url" id="aiPay" value="' + esc(l.pay_url || "") + '" placeholder="https://yeonteacher.kr/..."></label>' +
       '<label class="field"><span class="k">연결 클래스 (선택)</span><select id="aiClass">' + opts(AD.classes, l.class_id, "id", function (c) { return c.name; }, "연결 안 함") + '</select></label></div>' +
@@ -3806,7 +3921,7 @@ window.CONFIG = {
         return sb.from("materials").insert({
           class_id: cid2, lesson_id: lid2 || null, title: title, kind: $("#amKind").value,
           storage_path: path, pages: Number($("#amPages").value) || null, size_bytes: file.size,
-          round_label: (function () { var l = AD.lessons.filter(function (x) { return x.id === lid2; })[0]; return l ? l.no + "강" : "공통"; })(),
+          round_label: (function () { var l = AD.lessons.filter(function (x) { return x.id === lid2; })[0]; return l ? l.no + "회" : "공통"; })(),
           is_published: true
         });
       }).then(function (r) {
@@ -3857,11 +3972,18 @@ window.CONFIG = {
     if (f.id === "adCatalogForm") {
       e.preventDefault();
       var iid = $("#aiId").value;
+      var kindRaw = $("#aiKind").value;
+      var metaList = $("#aiMeta").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+      if (kindRaw === "nje") {
+        if (!metaList.some(function (x) { return /^n\s*제$/i.test(x); })) metaList.push("N제");
+      } else {
+        metaList = metaList.filter(function (x) { return !/^n\s*제$/i.test(x); });
+      }
       var payload4 = {
-        kind: $("#aiKind").value, name: $("#aiName").value.trim(), badge: $("#aiBadge").value.trim() || null,
+        kind: kindRaw === "nje" ? "book" : kindRaw, name: $("#aiName").value.trim(), badge: $("#aiBadge").value.trim() || null,
         subtitle: $("#aiSub").value.trim() || null, price_text: $("#aiPrice").value.trim() || null,
         price_note: $("#aiPriceNote").value.trim() || null,
-        meta: $("#aiMeta").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
+        meta: metaList,
         pay_url: $("#aiPay").value.trim() || null, class_id: $("#aiClass").value || null,
         sort_order: Number($("#aiSort").value) || 0, is_public: $("#aiPublic").value === "true"
       };
@@ -3918,7 +4040,18 @@ window.CONFIG = {
       if (mb) return;
       if (t.closest("#pfEdit")) { $("#acctBody").innerHTML = accountHTML(true); return; }
       if (t.closest("#pfCancel")) { $("#acctBody").innerHTML = accountHTML(false); return; }
-      if (t.closest("#pfLogout")) { var bx = $("#logoutConfirm"); if (bx) bx.classList.add("on"); return; }
+      if (t.closest("#pfLogout")) {
+        var bx = $("#logoutConfirm");
+        if (!bx) { logout(); return; }
+        bx.classList.add("on");
+        // 모바일에서 확인 박스가 화면 밖에 있어 ‘안 눌린 것처럼’ 보이지 않도록 시트를 끝까지 스크롤
+        try {
+          var sbx = bx.closest(".sheet-body");
+          if (sbx) sbx.scrollTo({ top: sbx.scrollHeight, behavior: "smooth" });
+          bx.scrollIntoView({ block: "center", behavior: "smooth" });
+        } catch (e) { try { bx.scrollIntoView(); } catch (e2) {} }
+        return;
+      }
       if (t.closest("#logoutCancel")) { var bx2 = $("#logoutConfirm"); if (bx2) bx2.classList.remove("on"); return; }
       if (t.closest("#logoutYes")) { logout(); return; }
       if (t.closest("#pfSave")) { saveProfile(); return; }
