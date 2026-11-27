@@ -977,7 +977,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
         <label class="field">
           <span class="k" id="onbParentK">보호자 연락처 <span style="font-weight:500;color:var(--muted-2)">(선택)</span></span>
           <input type="tel" id="onbParent" name="parent_phone" placeholder="010-0000-0000" inputmode="tel">
-          <span class="hint">수업·숙제 안내를 보호자께도 드릴 때만 사용합니다.</span>
+          <span class="hint" id="onbParentHint">수업·숙제 안내를 보호자께도 드릴 때만 사용합니다.</span>
         </label>
         <div class="onb-err" id="onbErr" hidden></div>
         <div class="onb-foot">
@@ -3663,6 +3663,8 @@ window.CONFIG = {
     if (gk) gk.innerHTML = parent ? '자녀 학년 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>' : '학년<span class="req">*</span>';
     if (pk) pk.innerHTML = parent ? '학부모 연락처<span class="req">*</span>' : '연락처<span class="req">*</span>';
     if (pa) pa.innerHTML = parent ? '학생(자녀) 연락처 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>' : '보호자 연락처 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>';
+    var ph = $("#onbParentHint");
+    if (ph) ph.textContent = parent ? "자녀 휴대폰 번호가 있으면 함께 적어 주세요. (없으면 비워 두세요)" : "수업·숙제 안내를 보호자께도 드릴 때만 사용합니다.";
     var sc = $("#onbSchool"), gr = $("#onbGrade");
     if (sc) { sc.required = !parent; sc.placeholder = parent ? "예: 대동세무고 (선택)" : "예: 대동세무고"; }
     if (gr) { gr.required = !parent; gr.placeholder = parent ? "예: 예비 고3 (선택)" : "예: 예비 고3 / N수생"; }
