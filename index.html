@@ -360,6 +360,12 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .dm-input .dm-file{width:38px;height:38px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-strong);display:grid;place-items:center;flex:none}
 .dm-input .dm-file:hover{background:#EDF1F6}
 .dm-input .dm-file:disabled{opacity:.5}
+.dm-input .dm-emoji{width:38px;height:38px;border-radius:50%;background:transparent;border:1px solid transparent;display:grid;place-items:center;flex:none;font-size:19px;line-height:1}
+.dm-input .dm-emoji:hover{background:var(--surface-2);border-color:var(--line-strong)}
+.dm-emoji-pop{position:fixed;z-index:140;width:252px;padding:6px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 34px rgba(15,23,42,.16);display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+.dm-emoji-pop[hidden]{display:none}
+.dm-emoji-pop button{width:100%;height:34px;border-radius:9px;display:grid;place-items:center;font-size:19px;line-height:1;background:transparent}
+.dm-emoji-pop button:hover{background:var(--surface-2)}
 .dm-pick{display:flex;align-items:center;gap:9px;margin:10px 12px 0;padding:7px 9px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .dm-pick[hidden]{display:none}
 .dm-pick img,.dm-pick .ico{width:36px;height:36px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;color:var(--muted);object-fit:cover;flex:none;overflow:hidden}
@@ -382,7 +388,7 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 #dmViewer img{max-width:100%;max-height:86vh;border-radius:10px;object-fit:contain;background:#fff}
 #dmViewer .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center}
 #dmViewer .fn{position:absolute;left:16px;right:16px;bottom:14px;text-align:center;font-size:11.4px;color:rgba(255,255,255,.82)}
-@media (max-width:639px){.dm-body{height:min(46vh,380px);min-height:220px}.dm-input{padding:9px 10px}.dm-input button{width:40px;height:40px}.dm-input .dm-file{width:38px;height:38px}.dm-pick{margin:8px 10px 0}}
+@media (max-width:639px){.dm-body{height:min(46vh,380px);min-height:220px}.dm-input{padding:9px 10px}.dm-input button{width:40px;height:40px}.dm-input .dm-file{width:38px;height:38px}.dm-input .dm-emoji{width:34px;height:34px;font-size:18px}.dm-pick{margin:8px 10px 0}.dm-emoji-pop{width:236px}.dm-emoji-pop button{height:32px;font-size:18px}}
 
 /* ───────── 비로그인 1:1 상담 ───────── */
 .gq{padding:20px 18px}
@@ -1235,6 +1241,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
             <div class="dm-pick" id="dmPick" hidden></div>
             <div class="dm-input">
               <button type="button" class="dm-file" id="dmAttach" aria-label="사진·파일 첨부" title="사진·파일 첨부"><svg width="18" height="18"><use href="#i-clip"/></svg></button>
+              <button type="button" class="dm-emoji" data-emoji-btn="1" data-emoji-for="dmText" aria-label="이모지 넣기" title="이모지">😊</button>
               <input type="file" id="dmFile" accept="image/*,.pdf,.hwp,.hwpx,.docx,.xlsx,.zip" hidden>
               <textarea id="dmText" rows="1" maxlength="2000" placeholder="메시지를 입력하세요" aria-label="메시지 입력"></textarea>
               <button type="submit" id="dmSend" aria-label="보내기"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>
@@ -1621,6 +1628,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
   <button class="x" type="button" data-dmviewerclose aria-label="닫기"><svg width="18" height="18"><use href="#i-close"/></svg></button>
   <div class="fn"></div>
 </div>
+<div id="dmEmojiPop" class="dm-emoji-pop" hidden role="dialog" aria-label="이모지 고르기"></div>
 <script>
 window.CONFIG = {
   /* ───────── 여기 세 줄만 채우면 실제 운영으로 동작합니다 ───────── */
@@ -3875,6 +3883,40 @@ window.CONFIG = {
     document.body.style.overflow = "";
   }
 
+  /* ── 이모지 피커 ── */
+  var DM_EMOJI = ["😊", "😄", "👍", "❤️", "🙌", "🔥", "👏", "🙏", "🎉", "💡", "✍️", "📚", "✅", "❓", "😅", "😢", "😮", "🙇", "💪", "⭐"];
+  var DM_EMOJI_TARGET = "";
+
+  function dmEmojiPop() { return document.getElementById("dmEmojiPop"); }
+  function dmEmojiClose() { var p = dmEmojiPop(); if (p) p.hidden = true; }
+  function dmEmojiOpen(btn) {
+    var pop = dmEmojiPop();
+    if (!pop || !btn) return;
+    DM_EMOJI_TARGET = btn.getAttribute("data-emoji-for") || "";
+    pop.innerHTML = DM_EMOJI.map(function (e) {
+      return '<button type="button" data-emoji="' + e + '" aria-label="' + e + '">' + e + '</button>';
+    }).join("");
+    pop.hidden = false;
+    var r = btn.getBoundingClientRect();
+    var w = pop.offsetWidth || 252, h = pop.offsetHeight || 168;
+    var left = Math.min(Math.max(8, r.left - 8), Math.max(8, window.innerWidth - w - 8));
+    var top = r.top - h - 10;
+    if (top < 8) top = Math.min(window.innerHeight - h - 8, r.bottom + 10);
+    pop.style.left = left + "px";
+    pop.style.top = Math.max(8, top) + "px";
+  }
+  function dmEmojiInsert(e) {
+    var ta = DM_EMOJI_TARGET ? document.getElementById(DM_EMOJI_TARGET) : null;
+    if (!ta) ta = document.querySelector("#adBody form[data-dm] textarea[name='dmBody']") || document.getElementById("dmText");
+    if (!ta) return;
+    var s = (ta.selectionStart == null) ? ta.value.length : ta.selectionStart;
+    var e2 = (ta.selectionEnd == null) ? ta.value.length : ta.selectionEnd;
+    ta.value = ta.value.slice(0, s) + e + ta.value.slice(e2);
+    var pos = s + e.length;
+    try { ta.focus(); ta.setSelectionRange(pos, pos); } catch (err) {}
+    ta.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
   function myEmail() { return ((session && session.user && session.user.email) || "").toLowerCase(); }
   function myName() {
     if (profile && profile.name) return profile.name;
@@ -4151,7 +4193,22 @@ window.CONFIG = {
         if (e.target === v || (e.target.closest && e.target.closest("[data-dmviewerclose]"))) dmCloseViewer();
       });
     }
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") dmCloseViewer(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { dmCloseViewer(); dmEmojiClose(); } });
+    document.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var eb = t.closest("[data-emoji-btn]");
+      if (eb) {
+        var pop = dmEmojiPop();
+        if (pop && !pop.hidden && DM_EMOJI_TARGET === eb.getAttribute("data-emoji-for")) dmEmojiClose();
+        else dmEmojiOpen(eb);
+        return;
+      }
+      var em = t.closest("#dmEmojiPop [data-emoji]");
+      if (em) { dmEmojiInsert(em.getAttribute("data-emoji")); return; }
+      var pop2 = dmEmojiPop();
+      if (pop2 && !pop2.hidden) dmEmojiClose();
+    });
     document.addEventListener("click", function (e) {
       var t = e.target;
       if (!t || !t.closest) return;
@@ -4722,8 +4779,9 @@ window.CONFIG = {
             ((AD.dmPick && AD.dmPick.email === cur.email) ? dmPickMarkup(AD.dmPick) : '') + '</div>' +
           '<div class="dm-input">' +
           '<button type="button" class="dm-file" data-dmattach="1" aria-label="사진·파일 첨부" title="사진·파일 첨부"><svg width="18" height="18"><use href="#i-clip"/></svg></button>' +
+          '<button type="button" class="dm-emoji" data-emoji-btn="1" data-emoji-for="adDmText" aria-label="이모지 넣기" title="이모지">😊</button>' +
           '<input type="file" data-dmfile="1" accept="image/*,.pdf,.hwp,.hwpx,.docx,.xlsx,.zip" hidden>' +
-          '<textarea name="dmBody" rows="1" maxlength="2000" placeholder="답장을 입력하세요" aria-label="답장 입력"></textarea>' +
+          '<textarea id="adDmText" name="dmBody" rows="1" maxlength="2000" placeholder="답장을 입력하세요" aria-label="답장 입력"></textarea>' +
           '<button type="submit" aria-label="보내기"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>' +
           '</div>' +
         '</form></div>';
