@@ -354,7 +354,35 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .dm-input button{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;flex:none}
 .dm-input button[disabled]{background:#E5E7EB;color:#9CA3AF}
 .dm-hint{font-size:10.6px;color:var(--muted-2);padding:0 16px 10px;background:#fff}
-@media (max-width:639px){.dm-body{height:min(46vh,380px);min-height:220px}.dm-input{padding:9px 10px}.dm-input button{width:40px;height:40px}}
+/* ── 1:1 상담 사진·파일 첨부 ── */
+.dm-compose{display:flex;flex-direction:column;border-top:1px solid var(--line-soft);background:#fff}
+.dm-compose .dm-input{border-top:none}
+.dm-input .dm-file{width:38px;height:38px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-strong);display:grid;place-items:center;flex:none}
+.dm-input .dm-file:hover{background:#EDF1F6}
+.dm-input .dm-file:disabled{opacity:.5}
+.dm-pick{display:flex;align-items:center;gap:9px;margin:10px 12px 0;padding:7px 9px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.dm-pick[hidden]{display:none}
+.dm-pick img,.dm-pick .ico{width:36px;height:36px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;color:var(--muted);object-fit:cover;flex:none;overflow:hidden}
+.dm-pick .m{min-width:0;flex:1}
+.dm-pick .m b{display:block;font-size:11.8px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dm-pick .m span{display:block;font-size:10.6px;color:var(--muted-2);margin-top:2px}
+.dm-pick .x{width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid var(--line-strong);color:var(--muted);display:grid;place-items:center;flex:none}
+.dm-b img.dm-img{display:block;max-width:min(224px,56vw);max-height:250px;width:auto;border-radius:11px;background:rgba(255,255,255,.4);cursor:zoom-in}
+.dm-b.media{padding:4px 4px 2px}
+.dm-b.media .cap{padding:6px 8px 4px;white-space:pre-wrap;overflow-wrap:anywhere}
+.dm-filecard{display:flex;align-items:center;gap:9px;min-width:168px;max-width:100%;cursor:pointer;text-align:left}
+.dm-filecard .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;background:rgba(0,0,0,.07)}
+.dm-row.me .dm-filecard .ic{background:rgba(255,255,255,.2)}
+.dm-filecard .nm{display:block;font-size:11.8px;font-weight:600;line-height:1.35;word-break:break-all}
+.dm-filecard .sz{display:block;font-size:10.2px;opacity:.72;margin-top:2px}
+.dm-b.fileb{padding:8px 11px}
+.dm-b.fileb .cap{margin-top:6px;white-space:pre-wrap;overflow-wrap:anywhere}
+#dmViewer{position:fixed;inset:0;z-index:130;background:rgba(12,16,22,.92);display:none;align-items:center;justify-content:center;padding:16px}
+#dmViewer.on{display:flex}
+#dmViewer img{max-width:100%;max-height:86vh;border-radius:10px;object-fit:contain;background:#fff}
+#dmViewer .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center}
+#dmViewer .fn{position:absolute;left:16px;right:16px;bottom:14px;text-align:center;font-size:11.4px;color:rgba(255,255,255,.82)}
+@media (max-width:639px){.dm-body{height:min(46vh,380px);min-height:220px}.dm-input{padding:9px 10px}.dm-input button{width:40px;height:40px}.dm-input .dm-file{width:38px;height:38px}.dm-pick{margin:8px 10px 0}}
 
 /* ───────── 비로그인 1:1 상담 ───────── */
 .gq{padding:20px 18px}
@@ -1183,7 +1211,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
       <section class="view" data-view="qna" aria-labelledby="v2">
         <div class="page-head">
           <h1 id="v2">1:1 상담</h1>
-          <p class="sub">선생님과 1:1로 대화하는 공간입니다. <b>학생은 문제·수업 질문</b>을, <b>학부모·수강 예정자는 수강·교재 상담</b>을 남겨 주세요. 단원별 자주 묻는 질문은 아래에서 먼저 찾아볼 수 있어요.</p>
+          <p class="sub">선생님과 1:1로 대화하는 공간입니다. <b>수업·문제·과제 질문</b>을 편하게 남겨 주세요. 문제 사진이나 교재 파일을 함께 보낼 수 있고, 단원별 자주 묻는 질문은 아래에서 먼저 찾아볼 수 있어요.</p>
         </div>
 
         <section class="dm" id="dmBox" aria-labelledby="dmTitle" hidden>
@@ -1198,11 +1226,16 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
             <span class="dm-state" id="dmState"><i></i>실시간</span>
           </div>
           <div class="dm-body" id="dmBody" aria-live="polite"></div>
-          <form class="dm-input" id="dmForm">
-            <textarea id="dmText" rows="1" maxlength="2000" placeholder="메시지를 입력하세요" aria-label="메시지 입력"></textarea>
-            <button type="submit" id="dmSend" aria-label="보내기"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>
+          <form class="dm-compose" id="dmForm">
+            <div class="dm-pick" id="dmPick" hidden></div>
+            <div class="dm-input">
+              <button type="button" class="dm-file" id="dmAttach" aria-label="사진·파일 첨부" title="사진·파일 첨부"><svg width="18" height="18"><use href="#i-clip"/></svg></button>
+              <input type="file" id="dmFile" accept="image/*,.pdf,.hwp,.hwpx,.docx,.xlsx,.zip" hidden>
+              <textarea id="dmText" rows="1" maxlength="2000" placeholder="메시지를 입력하세요" aria-label="메시지 입력"></textarea>
+              <button type="submit" id="dmSend" aria-label="보내기"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>
+            </div>
           </form>
-          <p class="dm-hint">Enter 전송 · Shift+Enter 줄바꿈 · 답변은 보통 24시간 안에 드립니다.</p>
+          <p class="dm-hint">Enter 전송 · Shift+Enter 줄바꿈 · 사진은 10MB, 파일(PDF·한글·Word·Excel·ZIP)은 20MB까지</p>
         </section>
 
         <section class="dm" id="gqBox" aria-labelledby="gqTitle">
@@ -1577,6 +1610,11 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
 </div>
 <div class="wmbusy" id="wmBusy" role="status" aria-live="polite">
   <span class="wmsp" aria-hidden="true"></span><span id="wmBusyText">워터마크 생성 중…</span>
+</div>
+<div id="dmViewer" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+  <img alt="첨부 사진">
+  <button class="x" type="button" data-dmviewerclose aria-label="닫기"><svg width="18" height="18"><use href="#i-close"/></svg></button>
+  <div class="fn"></div>
 </div>
 <script>
 window.CONFIG = {
@@ -2745,8 +2783,7 @@ window.CONFIG = {
 
       if (isAdmin || (profile && profile.role === "admin")) { startAdmin(); return; }
 
-      var needOnboard = !profile || !profile.phone ||
-        ((profile.member_type || "student") !== "parent" && (!profile.school || !profile.grade));
+      var needOnboard = !profile || !profile.phone || !profile.school || !profile.grade;
       if (needOnboard) {
         $("#onbEmail").textContent = email;
         if ($("#onbType")) { $("#onbType").value = (profile && profile.member_type) || "student"; onbTypeUI(); }
@@ -3659,15 +3696,15 @@ window.CONFIG = {
     var t = (el && el.value) || "student";
     var parent = t === "parent";
     var sk = $("#onbSchoolK"), gk = $("#onbGradeK"), pk = $("#onbPhoneK"), pa = $("#onbParentK");
-    if (sk) sk.innerHTML = parent ? '자녀 학교 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>' : '학교<span class="req">*</span>';
-    if (gk) gk.innerHTML = parent ? '자녀 학년 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>' : '학년<span class="req">*</span>';
+    if (sk) sk.innerHTML = parent ? '자녀 학교<span class="req">*</span>' : '학교<span class="req">*</span>';
+    if (gk) gk.innerHTML = parent ? '자녀 학년<span class="req">*</span>' : '학년<span class="req">*</span>';
     if (pk) pk.innerHTML = parent ? '학부모 연락처<span class="req">*</span>' : '연락처<span class="req">*</span>';
     if (pa) pa.innerHTML = parent ? '학생(자녀) 연락처 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>' : '보호자 연락처 <span style="font-weight:500;color:var(--muted-2)">(선택)</span>';
     var ph = $("#onbParentHint");
-    if (ph) ph.textContent = parent ? "자녀 휴대폰 번호가 있으면 함께 적어 주세요. (없으면 비워 두세요)" : "수업·숙제 안내를 보호자께도 드릴 때만 사용합니다.";
+    if (ph) ph.textContent = parent ? "학생 본인에게도 수업·숙제 안내가 필요할 때만 사용합니다." : "수업·숙제 안내를 보호자께도 드릴 때만 사용합니다.";
     var sc = $("#onbSchool"), gr = $("#onbGrade");
-    if (sc) { sc.required = !parent; sc.placeholder = parent ? "예: 대동세무고 (선택)" : "예: 대동세무고"; }
-    if (gr) { gr.required = !parent; gr.placeholder = parent ? "예: 예비 고3 (선택)" : "예: 예비 고3 / N수생"; }
+    if (sc) { sc.required = true; sc.placeholder = "예: 대동세무고"; }
+    if (gr) { gr.required = true; gr.placeholder = "예: 예비 고3 / N수생"; }
   }
 
   function saveOnboarding(e) {
@@ -3677,7 +3714,7 @@ window.CONFIG = {
     var school = $("#onbSchool").value.trim(), grade = $("#onbGrade").value.trim(),
         phone = $("#onbPhone").value.trim(), parent = $("#onbParent").value.trim();
     if (!phone) { err.hidden = false; err.textContent = "연락처를 꼭 입력해 주세요."; return; }
-    if (type !== "parent" && (!school || !grade)) { err.hidden = false; err.textContent = "학교·학년을 입력해 주세요."; return; }
+    if (!school || !grade) { err.hidden = false; err.textContent = type === "parent" ? "자녀 학교·학년을 입력해 주세요." : "학교·학년을 입력해 주세요."; return; }
     if (MODE === "preview") { flash("미리보기 모드 — 저장되지 않아요."); return; }
     var btn = $("#onbSave"); btnBusy(btn, true, "저장 중…");
     var payload = { school: school || null, grade: grade || null, phone: phone, parent_phone: parent || null,
@@ -3700,6 +3737,131 @@ window.CONFIG = {
   var DM_CH = null;       // 실시간 채널
   var DM_TIMER = null;    // 폴링 타이머
   var GUEST = false;      // 비로그인 둘러보기
+
+  /* ── 사진·파일 첨부 ── */
+  var DM_BUCKET = "dm-attachments";
+  var DM_URL = {};                                  // path → 서명 URL (1시간)
+  var DM_PICK = null;                               // { file, kind, url }
+  var DM_SENDING = false;
+  var DM_IMG_MAX = 10 * 1024 * 1024;
+  var DM_DOC_MAX = 20 * 1024 * 1024;
+  var DM_EXT = ["jpg", "jpeg", "png", "webp", "gif", "heic", "heif", "pdf", "hwp", "hwpx", "docx", "xlsx", "zip"];
+  var DM_EXT_IMG = ["jpg", "jpeg", "png", "webp", "gif", "heic", "heif"];
+
+  function dmExt(n) { var p = String(n || "").split("."); return p.length > 1 ? p.pop().toLowerCase() : ""; }
+  function dmIsImg(name, type) { return /^image\//.test(String(type || "")) || DM_EXT_IMG.indexOf(dmExt(name)) >= 0; }
+  function dmKindOf(m) { return dmIsImg(m.attachment_name, m.attachment_type) ? "image" : "file"; }
+  function dmSize(n) {
+    n = Number(n) || 0;
+    if (n >= 1048576) return (Math.round(n / 104857.6) / 10) + "MB";
+    if (n >= 1024) return Math.round(n / 1024) + "KB";
+    return n + "B";
+  }
+  function dmCheckFile(file) {
+    if (!file) return "보낼 파일을 선택해 주세요.";
+    var ext = dmExt(file.name);
+    if (DM_EXT.indexOf(ext) < 0) return "사진·PDF·한글(hwp/hwpx)·Word·Excel·ZIP 파일만 보낼 수 있어요.";
+    if (dmIsImg(file.name, file.type) && file.size > DM_IMG_MAX) return "사진은 10MB까지 보낼 수 있어요.";
+    if (!dmIsImg(file.name, file.type) && file.size > DM_DOC_MAX) return "파일은 20MB까지 보낼 수 있어요.";
+    return "";
+  }
+  function dmPickMarkup(pick) {
+    var img = pick.kind === "image";
+    return (img
+        ? '<img src="' + esc(pick.url) + '" alt="선택한 사진 미리보기">'
+        : '<span class="ico"><svg width="16" height="16"><use href="#i-doc"/></svg></span>') +
+      '<span class="m"><b>' + esc(pick.file.name) + '</b><span>' + dmSize(pick.file.size) + ' · ' + (img ? "사진" : "파일") + ' · 보내기 전</span></span>' +
+      '<button class="x" type="button" data-dmpickx="1" aria-label="첨부 취소"><svg width="12" height="12"><use href="#i-close"/></svg></button>';
+  }
+  function dmDropPick() {
+    if (DM_PICK && DM_PICK.url) { try { URL.revokeObjectURL(DM_PICK.url); } catch (e) {} }
+    DM_PICK = null;
+  }
+  function dmPaintPick() {
+    var box = $("#dmPick");
+    if (!box) return;
+    if (!DM_PICK) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false; box.innerHTML = dmPickMarkup(DM_PICK);
+  }
+  function dmTakeFile(file) {
+    var bad = dmCheckFile(file);
+    if (bad) { flash(bad); return false; }
+    dmDropPick();
+    var img = dmIsImg(file.name, file.type);
+    DM_PICK = { file: file, kind: img ? "image" : "file", url: img ? URL.createObjectURL(file) : "" };
+    dmPaintPick();
+    return true;
+  }
+  function dmUpload(file, uid) {
+    if (!sb) return Promise.resolve({ error: { message: "연결되지 않았어요." } });
+    var ext = dmExt(file.name) || "bin";
+    var path = String(uid || (session && session.user && session.user.id) || "") + "/" +
+               Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
+    return sb.storage.from(DM_BUCKET).upload(path, file, {
+      cacheControl: "3600", upsert: false, contentType: file.type || "application/octet-stream"
+    }).then(function (r) {
+      return r.error ? { error: r.error } : { path: path };
+    }, function (e) { return { error: { message: String((e && e.message) || e) } }; });
+  }
+  function dmSign(paths) {
+    var need = (paths || []).filter(function (p, i, a) { return p && !DM_URL[p] && a.indexOf(p) === i; });
+    if (!need.length || !sb) return Promise.resolve();
+    return sb.storage.from(DM_BUCKET).createSignedUrls(need, 3600).then(function (r) {
+      if (r.error) { console.warn(r.error); return; }
+      (r.data || []).forEach(function (x) { if (x && x.signedUrl) DM_URL[x.path] = x.signedUrl; });
+    }, function (e) { console.warn("sign", e); });
+  }
+  function dmLoadMedia(root) {
+    if (!sb || MODE !== "live") return;
+    var scope = root || document;
+    if (!scope.querySelectorAll) return;
+    var imgs = [].slice.call(scope.querySelectorAll("img[data-dm-img]"));
+    var files = [].slice.call(scope.querySelectorAll("[data-dm-file]"));
+    var paths = [];
+    imgs.forEach(function (el) { if (!el.getAttribute("src") && el.dataset.dmImg) paths.push(el.dataset.dmImg); });
+    files.forEach(function (el) { if (el.dataset.ready !== "1" && el.dataset.dmFile) paths.push(el.dataset.dmFile); });
+    if (!paths.length) return;
+    dmSign(paths).then(function () {
+      imgs.forEach(function (el) {
+        var u = DM_URL[el.dataset.dmImg];
+        if (u && !el.getAttribute("src")) el.src = u;
+        else if (!u) el.alt = "사진을 불러오지 못했어요";
+      });
+      files.forEach(function (el) { if (DM_URL[el.dataset.dmFile]) el.dataset.ready = "1"; });
+    });
+  }
+  function dmDownload(path, name) {
+    if (!path) return;
+    if (MODE !== "live" || !sb) { flash("미리보기 모드 — 파일은 연결 후 열립니다."); return; }
+    sb.storage.from(DM_BUCKET).createSignedUrl(path, 300, { download: name || true }).then(function (r) {
+      if (r.error || !r.data) { flash("파일을 열지 못했어요: " + ((r.error && r.error.message) || "권한을 확인해 주세요")); return; }
+      window.open(r.data.signedUrl, "_blank", "noopener");
+    });
+  }
+  function dmOpenViewer(path, name) {
+    var v = document.getElementById("dmViewer");
+    if (!v) return;
+    var img = v.querySelector("img"), fn = v.querySelector(".fn");
+    function show(url) {
+      if (img) img.src = url;
+      if (fn) fn.textContent = name || "";
+      v.classList.add("on");
+      document.body.style.overflow = "hidden";
+    }
+    if (DM_URL[path]) { show(DM_URL[path]); return; }
+    if (!sb) return;
+    sb.storage.from(DM_BUCKET).createSignedUrl(path, 3600).then(function (r) {
+      if (r.error || !r.data) { flash("사진을 열지 못했어요."); return; }
+      DM_URL[path] = r.data.signedUrl;
+      show(r.data.signedUrl);
+    });
+  }
+  function dmCloseViewer() {
+    var v = document.getElementById("dmViewer");
+    if (!v) return;
+    v.classList.remove("on");
+    document.body.style.overflow = "";
+  }
 
   function myEmail() { return ((session && session.user && session.user.email) || "").toLowerCase(); }
   function myName() {
@@ -3725,9 +3887,28 @@ window.CONFIG = {
   }
 
   function dmBubbleHTML(m, mine, av) {
+    var cap = m.body ? esc(m.body) : "";
+    var body;
+    if (m.attachment_path || m._local) {
+      if (dmKindOf(m) === "image") {
+        var src = m._local || DM_URL[m.attachment_path] || "";
+        body = '<div class="dm-b media"><img class="dm-img" alt="사진" data-dm-img="' + esc(m.attachment_path || "") + '"' +
+               (src ? ' src="' + esc(src) + '"' : "") + '>' +
+               (cap ? '<div class="cap">' + cap + '</div>' : "") + '</div>';
+      } else {
+        body = '<div class="dm-b fileb"><div class="dm-filecard" data-dm-file="' + esc(m.attachment_path || "") +
+               '" data-dm-name="' + esc(m.attachment_name || "") + '" role="button" tabindex="0">' +
+               '<span class="ic"><svg width="16" height="16"><use href="#i-doc"/></svg></span>' +
+               '<span><span class="nm">' + esc(m.attachment_name || "파일") + '</span>' +
+               '<span class="sz">' + dmSize(m.attachment_size) + ' · 내려받기</span></span></div>' +
+               (cap ? '<div class="cap">' + cap + '</div>' : "") + '</div>';
+      }
+    } else {
+      body = '<div class="dm-b">' + cap + '</div>';
+    }
     return '<div class="dm-row ' + (mine ? "me" : "you") + '">' +
       (mine ? "" : '<span class="dm-av sm" aria-hidden="true">' + esc(av || "연") + '</span>') +
-      '<div class="dm-b">' + esc(m.body) + '</div>' +
+      body +
       '<span class="dm-t">' + hm(m.created_at) + (m._pending ? " · 전송 중" : "") + '</span>' +
     '</div>';
   }
@@ -3752,6 +3933,7 @@ window.CONFIG = {
     });
     box.innerHTML = out;
     box.scrollTop = box.scrollHeight;
+    dmLoadMedia(box);
   }
 
   function loadDM(quiet) {
@@ -3807,23 +3989,51 @@ window.CONFIG = {
     var ta = $("#dmText");
     if (!ta) return;
     var body = (ta.value || "").trim();
-    if (!body) return;
+    var pick = DM_PICK;
+    if (!body && !pick) return;
     if (body.length > 2000) { flash("메시지는 2,000자까지 보낼 수 있어요."); return; }
-    ta.value = ""; autoGrow(ta);
-    var pending = { id: "tmp-" + Date.now(), sender_role: "student", body: body, created_at: new Date().toISOString(), _pending: true };
-    DM.push(pending); renderDM();
+    if (pick) { var bad = dmCheckFile(pick.file); if (bad) { flash(bad); return; } }
+    if (DM_SENDING) return;
+    DM_SENDING = true;
     var btn = $("#dmSend"); if (btn) btn.disabled = true;
-    sb.from("dm_messages").insert({
-      student_email: myEmail(), student_name: myName(), sender_role: "student", body: body
-    }).then(function (r) {
+    var att = $("#dmAttach"); if (att) att.disabled = true;
+    ta.value = ""; autoGrow(ta);
+    DM_PICK = null; dmPaintPick();
+    var pending = {
+      id: "tmp-" + Date.now(), sender_role: "student", body: body || null,
+      created_at: new Date().toISOString(), _pending: true,
+      attachment_name: pick ? pick.file.name : null,
+      attachment_type: pick ? (pick.file.type || "application/octet-stream") : null,
+      attachment_size: pick ? pick.file.size : null,
+      _local: pick && pick.kind === "image" ? pick.url : null
+    };
+    DM.push(pending); renderDM();
+    (pick ? dmUpload(pick.file) : Promise.resolve({})).then(function (up) {
+      if (up && up.error) return { error: up.error };
+      var row = { student_email: myEmail(), student_name: myName(), sender_role: "student", body: body || null };
+      if (pick) {
+        row.attachment_path = up.path; row.attachment_name = pick.file.name;
+        row.attachment_type = pick.file.type || "application/octet-stream"; row.attachment_size = pick.file.size;
+      }
+      return sb.from("dm_messages").insert(row).then(function (r) {
+        return r.error ? { error: r.error, cleanup: up.path } : {};
+      });
+    }).then(function (res) {
+      DM_SENDING = false;
       if (btn) btn.disabled = false;
-      if (r.error) {
+      if (att) att.disabled = false;
+      if (res && res.error) {
         DM = DM.filter(function (m) { return m.id !== pending.id; });
-        renderDM(); ta.value = body; autoGrow(ta);
-        flash("메시지를 보내지 못했어요: " + r.error.message);
+        renderDM();
+        if (body) { ta.value = body; autoGrow(ta); }
+        if (pick) { DM_PICK = pick; dmPaintPick(); }
+        flash("메시지를 보내지 못했어요: " + res.error.message);
+        if (res.cleanup && sb) sb.storage.from(DM_BUCKET).remove([res.cleanup]);
         return;
       }
-      loadDM(true);
+      loadDM(true).then(function () {
+        if (pick && pick.url) { try { URL.revokeObjectURL(pick.url); } catch (e2) {} }
+      });
     });
   }
 
@@ -3899,6 +4109,13 @@ window.CONFIG = {
 
     var df = $("#dmForm");
     if (df) df.addEventListener("submit", sendDM);
+    var at = $("#dmAttach"), fi = $("#dmFile");
+    if (at && fi) at.addEventListener("click", function () { fi.click(); });
+    if (fi) fi.addEventListener("change", function (e) {
+      var f = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if (f) dmTakeFile(f);
+    });
     var dt = $("#dmText");
     if (dt) {
       dt.addEventListener("keydown", function (e) {
@@ -3913,12 +4130,38 @@ window.CONFIG = {
     });
   }
 
+  /* ── 첨부 공통 UI(학생·관리자): 사진 크게 보기 · 파일 내려받기 · 선택 취소 · 뷰어 닫기 ── */
+  function dmBindSharedUI() {
+    var v = document.getElementById("dmViewer");
+    if (v && !v._bound) {
+      v._bound = true;
+      v.addEventListener("click", function (e) {
+        if (e.target === v || (e.target.closest && e.target.closest("[data-dmviewerclose]"))) dmCloseViewer();
+      });
+    }
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") dmCloseViewer(); });
+    document.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var x = t.closest("[data-dmpickx]");
+      if (x) {
+        if (x.closest("#adDmPick")) { if (AD.dmPick && AD.dmPick.url) { try { URL.revokeObjectURL(AD.dmPick.url); } catch (e1) {} } AD.dmPick = null; adPaintDmPick(); }
+        else { dmDropPick(); dmPaintPick(); }
+        return;
+      }
+      var im = t.closest("img[data-dm-img]");
+      if (im && im.getAttribute("src")) { dmOpenViewer(im.dataset.dmImg, ""); return; }
+      var fc = t.closest("[data-dm-file]");
+      if (fc) { dmDownload(fc.dataset.dmFile, fc.dataset.dmName || ""); return; }
+    });
+  }
+
   /* ═══════════════════════════════════════════════════════════════
      5. 관리자
      ═══════════════════════════════════════════════════════════════ */
   var AD = { tab: "students", q: "", classes: [], lessons: [], materials: [], quizzes: [], attempts: [],
              homeworks: [], submissions: [], faqs: [], catalog: [], enrolls: [], books: [], students: [],
-             messages: [], dmOpen: null };
+             messages: [], dmOpen: null, dmPick: null };
 
   function startAdmin() {
     screen("screenAdmin");
@@ -3998,7 +4241,7 @@ window.CONFIG = {
       body.innerHTML = fn();
       if (AD.tab === "inquiries") {
         var db = document.getElementById("adDmBody");
-        if (db) db.scrollTop = db.scrollHeight;
+        if (db) { db.scrollTop = db.scrollHeight; dmLoadMedia(db); }
       }
     }).catch(function (e) {
       body.innerHTML = '<div class="ad-empty">데이터를 불러오지 못했어요.<br>' + esc(e && e.message ? e.message : e) + '</div>';
@@ -4368,6 +4611,36 @@ window.CONFIG = {
     return '<span class="ad-pill ' + (t === "parent" ? "wait" : "on") + '" style="margin-left:2px">' + (t === "parent" ? "학부모" : "학생") + '</span>';
   }
 
+  function dmPreview(m) {
+    var b = String(m.body || "").replace(/\s+/g, " ").trim();
+    if (!b) return dmKindOf(m) === "image" ? "사진" : "파일";
+    return b.length > 46 ? b.slice(0, 46) + "…" : b;
+  }
+
+  function adminDmUid(email) {
+    var p = (AD.students || []).filter(function (s) {
+      return String(s.email || "").toLowerCase() === String(email || "").toLowerCase();
+    })[0];
+    return p && p.id ? p.id : null;
+  }
+
+  function adPaintDmPick() {
+    var box = document.getElementById("adDmPick");
+    if (!box) return;
+    if (!AD.dmPick || !AD.dmOpen || AD.dmPick.email !== AD.dmOpen) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false; box.innerHTML = dmPickMarkup(AD.dmPick);
+  }
+
+  function adDmTakeFile(file) {
+    if (!AD.dmOpen) return;
+    var bad = dmCheckFile(file);
+    if (bad) { flash(bad); return; }
+    if (AD.dmPick && AD.dmPick.url) { try { URL.revokeObjectURL(AD.dmPick.url); } catch (e) {} }
+    var img = dmIsImg(file.name, file.type);
+    AD.dmPick = { email: AD.dmOpen, file: file, kind: img ? "image" : "file", url: img ? URL.createObjectURL(file) : "" };
+    adPaintDmPick();
+  }
+
   function dmConvs() {
     var map = {}, list = [];
     (AD.messages || []).forEach(function (m) {
@@ -4408,7 +4681,7 @@ window.CONFIG = {
     function item(c) {
       return '<button class="dml-item' + (AD.dmOpen === c.email ? " on" : "") + '" type="button" data-act="dmopen" data-email="' + esc(c.email) + '">' +
         '<div class="dml-t"><h4>' + esc(c.name || c.email) + memberPill(c.email) + '</h4>' +
-          '<p>' + (c.last ? (c.last.sender_role === "admin" ? "나: " : "") + esc(String(c.last.body).replace(/\s+/g, " ").slice(0, 46)) : "") + '</p>' +
+          '<p>' + (c.last ? (c.last.sender_role === "admin" ? "나: " : "") + esc(dmPreview(c.last)) : "") + '</p>' +
           '<p style="color:var(--muted-2)">' + esc(c.email) + '</p></div>' +
         '<div class="dml-n">' + (c.last ? esc(inqDate(c.last.created_at)) : "") +
           (c.unread ? '<span style="display:inline-grid;place-items:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#DC2626;color:#fff;font-size:10px;font-weight:700">' + c.unread + '</span>' : '') +
@@ -4426,9 +4699,15 @@ window.CONFIG = {
         '<div class="dm-admin-body" id="adDmBody">' +
           cur.msgs.map(function (m) { return dmBubbleHTML(m, m.sender_role === "admin", av); }).join("") +
         '</div>' +
-        '<form class="dm-input" data-dm="' + esc(cur.email) + '">' +
-          '<textarea name="dmBody" rows="1" maxlength="2000" placeholder="답장을 입력하세요 (Enter 전송)" aria-label="답장 입력"></textarea>' +
+        '<form class="dm-compose" data-dm="' + esc(cur.email) + '">' +
+          '<div class="dm-pick" id="adDmPick"' + ((AD.dmPick && AD.dmPick.email === cur.email) ? '' : ' hidden') + '>' +
+            ((AD.dmPick && AD.dmPick.email === cur.email) ? dmPickMarkup(AD.dmPick) : '') + '</div>' +
+          '<div class="dm-input">' +
+          '<button type="button" class="dm-file" data-dmattach="1" aria-label="사진·파일 첨부" title="사진·파일 첨부"><svg width="18" height="18"><use href="#i-clip"/></svg></button>' +
+          '<input type="file" data-dmfile="1" accept="image/*,.pdf,.hwp,.hwpx,.docx,.xlsx,.zip" hidden>' +
+          '<textarea name="dmBody" rows="1" maxlength="2000" placeholder="답장을 입력하세요" aria-label="답장 입력"></textarea>' +
           '<button type="submit" aria-label="보내기"><svg width="18" height="18"><use href="#i-arrow"/></svg></button>' +
+          '</div>' +
         '</form></div>';
     } else {
       chat = '<div class="ad-sec" style="margin-bottom:0"><div class="ad-sec-head"><h2>대화</h2></div>' +
@@ -4500,6 +4779,14 @@ window.CONFIG = {
 
   function adClick(e) {
     var t = e.target.closest ? e.target.closest("[data-act]") : null;
+    // 첨부 버튼은 data-act 가 아니라서 따로 처리
+    var at = e.target.closest ? e.target.closest("[data-dmattach]") : null;
+    if (at) {
+      e.preventDefault();
+      var fm0 = at.closest("form"), inp0 = fm0 ? fm0.querySelector("input[data-dmfile]") : null;
+      if (inp0) inp0.click();
+      return;
+    }
     if (!t) return;
     var act = t.dataset.act, id = t.dataset.id;
     e.preventDefault();
@@ -4560,6 +4847,8 @@ window.CONFIG = {
     if (act === "delcatalog") { adDelete("catalog_items", id, "상품을 삭제했어요."); return; }
     if (act === "dmopen") {
       AD.dmOpen = t.dataset.email || null;
+      if (AD.dmPick && AD.dmPick.url && AD.dmPick.email !== AD.dmOpen) { try { URL.revokeObjectURL(AD.dmPick.url); } catch (e0) {} }
+      if (!AD.dmPick || AD.dmPick.email !== AD.dmOpen) AD.dmPick = null;
       if (AD.dmOpen && MODE === "live") {
         sb.rpc("dm_admin_mark_read", { p_email: AD.dmOpen }).then(function () { adRender(); });
       } else { adRender(); }
@@ -4618,18 +4907,43 @@ window.CONFIG = {
       var dta = f.querySelector("[name='dmBody']");
       var dbody = dta ? (dta.value || "").trim() : "";
       var dem = f.dataset.dm;
-      if (!dbody) return;
+      var pick = (AD.dmPick && AD.dmPick.email === dem) ? AD.dmPick : null;
+      if (!dbody && !pick) return;
       if (MODE === "preview") { flash("미리보기 모드 — 전송되지 않아요."); return; }
+      if (f._sending) return;
       var dnm = ((AD.messages || []).filter(function (m) {
         return (m.student_email || "").toLowerCase() === dem && m.student_name;
       })[0] || {}).student_name || null;
-      if (dta) dta.value = "";
-      sb.from("dm_messages").insert({
-        student_email: dem, student_name: dnm, sender_role: "admin", body: dbody,
-        is_read_by_admin: true, is_read_by_student: false
-      }).then(function (r) {
-        if (r.error) { flash("답장을 보내지 못했어요: " + r.error.message); return; }
-        flash("답장을 보냈어요.");
+      var uid = adminDmUid(dem);
+      if (pick && !uid) { flash("학생 계정 정보를 찾지 못해 파일을 올릴 수 없어요."); return; }
+      f._sending = true;
+      var sendBtn = f.querySelector("button[type='submit']"); if (sendBtn) sendBtn.disabled = true;
+      if (dbody && dta) dta.value = "";
+      (pick ? dmUpload(pick.file, uid) : Promise.resolve({})).then(function (up) {
+        if (up && up.error) return { error: up.error };
+        var row = {
+          student_email: dem, student_name: dnm, sender_role: "admin", body: dbody || null,
+          is_read_by_admin: true, is_read_by_student: false
+        };
+        if (pick) {
+          row.attachment_path = up.path; row.attachment_name = pick.file.name;
+          row.attachment_type = pick.file.type || "application/octet-stream"; row.attachment_size = pick.file.size;
+        }
+        return sb.from("dm_messages").insert(row).then(function (r) {
+          return r.error ? { error: r.error, cleanup: up.path } : {};
+        });
+      }).then(function (res) {
+        f._sending = false;
+        if (sendBtn) sendBtn.disabled = false;
+        if (res && res.error) {
+          flash("답장을 보내지 못했어요: " + res.error.message);
+          if (dbody && dta) dta.value = dbody;
+          if (res.cleanup && sb) sb.storage.from(DM_BUCKET).remove([res.cleanup]);
+          return;
+        }
+        if (pick && pick.url) { try { URL.revokeObjectURL(pick.url); } catch (e1) {} }
+        AD.dmPick = null;
+        flash(pick ? "사진·파일을 보냈어요." : "답장을 보냈어요.");
         adRender();
       });
       return;
@@ -4777,6 +5091,7 @@ window.CONFIG = {
     var ot = $("#onbType"); if (ot) ot.addEventListener("change", onbTypeUI);
     var glb = $("#guestLoginBtn"); if (glb) glb.addEventListener("click", signIn);
     bindQna();
+    dmBindSharedUI();
 
     // 엔진 → 앱 후킹
     window.__bg = {
@@ -4869,6 +5184,12 @@ window.CONFIG = {
       });
       ab.addEventListener("change", function (e) {
         var t = e.target;
+        if (t.dataset && t.dataset.dmfile) {
+          var f0 = t.files && t.files[0];
+          t.value = "";
+          if (f0) adDmTakeFile(f0);
+          return;
+        }
         if (t.id === "adLessonClass") { AD._lessonClass = t.value; AD._editLesson = null; adRender(); }
         if (t.id === "adMatClass") { AD._matClass = t.value; adRender(); }
         if (t.id === "aqClass") { syncQuizDraft(); AD._editLesson = null; adRender(); }
