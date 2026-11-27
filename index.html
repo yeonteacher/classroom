@@ -299,10 +299,6 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .search .clr{position:absolute;right:7px;top:9px;width:28px;height:28px;border-radius:8px;display:none;place-items:center;color:var(--muted)}
 .search .clr:hover{background:var(--surface-2)}
 .search.has .clr{display:grid}
-.kakao-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);font-size:12.8px;color:var(--muted);line-height:1.55}
-.kakao-bar b{color:var(--ink-2);font-weight:650}
-.kakao-bar .kb-go{display:inline-flex;align-items:center;gap:3px;font-weight:650;color:var(--blue);white-space:nowrap;font-size:12.5px}
-.kakao-bar:hover{border-color:var(--line-strong);background:#fff}
 .faq + .faq{border-top:1px solid var(--line-soft)}
 .faq-btn{display:flex;gap:12px;width:100%;padding:18px 18px;text-align:left;align-items:flex-start}
 .faq-btn .qb{flex:1;min-width:0}
@@ -314,13 +310,6 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .faq-a{display:none;padding:0 18px 20px 18px;font-size:13px;color:var(--ink-2);line-height:1.78}
 .faq.open .faq-a{display:block}
 .faq-a b{color:var(--blue-deep);font-weight:650}
-.kakao-cta{padding:24px 20px;text-align:center}
-.kakao-cta .k-ico{width:48px;height:48px;border-radius:14px;background:#FEE500;display:grid;place-items:center;margin:0 auto 12px;color:#3C1E1E;font-size:11px;font-weight:800;letter-spacing:-.02em}
-.kakao-cta h3{font-size:15px;font-weight:700;letter-spacing:-.025em}
-.kakao-cta p{font-size:12.8px;color:var(--muted);margin-top:7px;line-height:1.7}
-.kakao-cta .btn{margin-top:18px;width:100%}
-.kakao-cta .alt{display:inline-block;margin-top:12px;font-size:11.8px;color:var(--muted);text-decoration:underline;text-underline-offset:2px}
-.kakao-cta .alt:hover{color:var(--ink-2)}
 
 /* ───────── 1:1 상담 (DM 채팅) ───────── */
 .dm{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;margin-bottom:26px}
@@ -630,7 +619,6 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
   .topbar .brand{display:none}
   .topbar{justify-content:flex-end}
   .eyebrow{display:none}
-  .kakao-bar{display:none}
   .top-actions{gap:8px}
   .tabbar{display:none}
   .view{max-width:1080px;padding:40px 40px 80px}
@@ -955,7 +943,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
     </div>
     <p class="gate-hint"><b>학생·학부모 모두</b> 구글 로그인으로 수강신청·교재·N제·1:1 상담을 이용할 수 있어요.<br>수강 등록 때 안내한 <b>구글 이메일</b>로 로그인해 주세요.</p>
     <div class="gate-foot">
-      <a href="https://pf.kakao.com/_xoCxfsn" target="_blank" rel="noopener noreferrer">수강 문의: 카카오채널</a>
+      <a href="https://yeonteacher.kr/meet" target="_blank" rel="noopener noreferrer">수강 문의: 홈페이지 상담 신청</a>
       <span class="sep"></span>
       <a href="https://yeonteacher.kr" target="_blank" rel="noopener noreferrer">홈페이지: yeonteacher.kr</a>
     </div>
@@ -1294,26 +1282,12 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
               <button class="chip" type="button" data-faqunit="6" aria-pressed="false">6단원</button>
             </div>
 
-            <a class="kakao-bar" href="https://pf.kakao.com/_xoCxfsn/chat" target="_blank" rel="noopener noreferrer">
-              <span><b>찾는 답이 없나요?</b> 카카오채널로 바로 물어보세요</span>
-              <span class="kb-go">1:1 질문 <svg width="11" height="11"><use href="#i-arrow"/></svg></span>
-            </a>
-
             <p class="filter-note" id="faqCount">FAQ 9개</p>
             <div class="list" id="faqList" style="margin-top:12px"><!-- js --></div>
           </div>
 
           <div class="form-card">
-            <div class="card kakao-cta">
-              <div class="k-ico">TALK</div>
-              <h3>FAQ로 해결되지 않았나요?</h3>
-              <p>카카오채널 <b style="color:var(--ink-2);font-weight:650">‘직탐은연티’</b>로 1:1 질문을 남겨 주세요. 선생님이 직접 확인하고 답변드려요.</p>
-              <a class="btn btn-primary" href="https://pf.kakao.com/_xoCxfsn/chat" target="_blank" rel="noopener noreferrer">
-                <svg width="17" height="17"><use href="#i-chat"/></svg> 카카오채널로 1:1 질문하기
-              </a>
-            </div>
-
-            <div class="card pad" style="margin-top:16px">
+            <div class="card pad">
               <h3 style="font-size:13.4px;font-weight:650;letter-spacing:-.02em">이렇게 물어보면 빨라요</h3>
               <ul style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
                 <li style="font-size:12.4px;color:var(--muted);line-height:1.65;padding-left:14px;position:relative"><span style="position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--line-strong)"></span><b style="color:var(--ink-2);font-weight:600">회차·문항 번호</b>를 함께 적어 주세요.</li>
@@ -1401,7 +1375,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
 
       <p class="foot-note">
         <svg width="13" height="13" style="margin-top:2px"><use href="#i-info"/></svg>
-        <span>문의는 카카오채널 <b>직탐은연티</b>로 남겨 주세요. 개인정보는 수강 관리 목적으로만 사용됩니다.</span>
+        <span>문의는 <b>홈페이지 상담 신청(yeonteacher.kr/meet)</b>을 이용해 주세요. 개인정보는 수강 관리 목적으로만 사용됩니다.</span>
       </p>
     </main>
 
@@ -1496,7 +1470,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
     </div>
     <div class="meet-note">
       <svg width="13" height="13"><use href="#i-info"/></svg>
-      <span>수업 시작 10분 전부터 입장할 수 있어요. 입장이 안 되면 1:1 상담이나 카톡 채널로 알려 주세요.</span>
+      <span>수업 시작 10분 전부터 입장할 수 있어요. 입장이 안 되면 1:1 상담으로 알려 주세요.</span>
     </div>
   </div>
   <div class="sheet-foot">
@@ -1636,7 +1610,6 @@ window.CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_t5A25K_RHHt8JRzAjL2w-Q_s-OgE_-0",  // publishable key (공개되어도 되는 키)
   ADMIN_EMAIL: "yeonteacher.zig@gmail.com",   // 선생님 구글 계정
   /* ───────────────────────────────────────────────────────────── */
-  KAKAO_CHANNEL: "https://pf.kakao.com/_xoCxfsn",
   HOMEPAGE: "https://yeonteacher.kr"
 };
 </script>
@@ -1668,7 +1641,7 @@ window.CONFIG = {
       { id: "teuk", name: "수능특강 집중반", sub: "수특 연계 10문항 정복", meta: ["7.6 개강", "12회"],
         badge: "[개강 예정]", tone: "badge-gray", price: "사전 상담 후 개별 안내", priceNote: "개강 일정이 확정되면 함께 공지", cta: "수강 신청" },
       { id: "clinic2", name: "1:1 질의·클리닉", sub: "질문·첨삭 개별 진행", meta: ["상시 접수", "학생별 개별 오픈"],
-        badge: "수강 중", tone: "badge-blue", price: "수강 중인 클래스", priceNote: "질문은 1:1 상담·카톡으로 남겨 주세요", cta: "강의실 가기", act: "go-class" }
+        badge: "수강 중", tone: "badge-blue", price: "수강 중인 클래스", priceNote: "질문은 1:1 상담으로 남겨 주세요", cta: "강의실 가기", act: "go-class" }
     ],
     books: [
       { id: "book1", name: "2028 성직 5단원 입문편", sub: "근로관계와 산업 안전 — 처음 배우는 학생용", meta: ["본문 + 확인 문제", "약 133쪽"],
@@ -1988,7 +1961,7 @@ window.CONFIG = {
           '<div class="live-body"><div class="row1"><span class="badge badge-gray">1:1 개별 진행</span></div>' +
             '<h3>' + esc(c.live.title) + '</h3>' +
             '<p class="meta">' + esc(liveWhen(c.live)) + ' · 이연화 선생님</p></div>' +
-          '<a class="btn btn-primary" href="https://pf.kakao.com/_xoCxfsn" target="_blank" rel="noopener noreferrer"><svg width="17" height="17"><use href="#i-chat"/></svg> 1:1 질문 남기기</a>' +
+          '<button class="btn btn-primary" type="button" data-tab="qna"><svg width="17" height="17"><use href="#i-chat"/></svg> 1:1 상담으로 질문하기</button>' +
         '</div>';
     }
 
@@ -2045,8 +2018,8 @@ window.CONFIG = {
             '<div class="faq-a">' + f.a + '</div></div>';
         }).join("")
       : '<div class="empty"><svg width="30" height="30"><use href="#i-search"/></svg><p>' +
-        (state.faqQuery ? "‘" + esc(state.faqQuery) + "’에 맞는 FAQ가 없어요.<br>카카오채널로 바로 물어보세요."
-                        : "이 단원 FAQ는 아직 없어요.<br>카카오채널로 바로 물어보세요.") + '</p></div>';
+        (state.faqQuery ? "‘" + esc(state.faqQuery) + "’에 맞는 FAQ가 없어요.<br>1:1 상담으로 선생님께 물어보세요."
+                        : "이 단원 FAQ는 아직 없어요.<br>1:1 상담으로 선생님께 물어보세요.") + '</p></div>';
     var filteredNote = (state.faqUnit !== "all" || state.faqQuery) ? " / 전체 " + FAQS.length + "개" : "";
     $("#faqCount").textContent = "FAQ " + list.length + "개" + filteredNote;
     $$("[data-faqunit]").forEach(function (b) {
@@ -2315,7 +2288,7 @@ window.CONFIG = {
     } else if (h.status === "checked") {
       body = head + photo + '<div class="hw-detail" style="background:var(--green-soft);border-color:#A7F3D0">' +
         '<div class="t" style="color:#065F46">선생님이 확인을 마쳤어요</div>' +
-        '<div class="m">' + esc(h.checkedAt) + ' 확인 · 피드백은 1:1 상담/카톡으로 안내드려요</div></div>' +
+        '<div class="m">' + esc(h.checkedAt) + ' 확인 · 피드백은 1:1 상담으로 안내드려요</div></div>' +
         drop;
     } else if (h.status === "submitted") {
       body = head + photo + '<div class="hw-detail" style="background:var(--blue-soft);border-color:var(--blue-line)">' +
@@ -2523,7 +2496,7 @@ window.CONFIG = {
     var url = s && s.dataset.url;
     closeModal();
     if (url) { window.open(url, "_blank", "noopener"); toast("구글 밋으로 연결했어요."); }
-    else { toast("이 회차의 수업 링크가 아직 등록되지 않았어요. 1:1 상담이나 카톡으로 알려 주세요."); }
+    else { toast("이 회차의 수업 링크가 아직 등록되지 않았어요. 1:1 상담으로 알려 주세요."); }
   });
   $("#startPlay").addEventListener("click", function () {
     var s = document.getElementById("sheetPlay");
@@ -2615,7 +2588,6 @@ window.CONFIG = {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  var KAKAO = "https://pf.kakao.com/_xoCxfsn";
   var HTML_ALLOWED = /<\/?(b|strong|br|i|em|u|span|p|ul|ol|li)(\s[^<>]*)?>/gi;
 
   /* FAQ 답변은 관리자가 쓴 글이라 최소 서식만 허용하고 나머지는 escape */
@@ -3148,10 +3120,12 @@ window.CONFIG = {
     var books = (DATA.books || []).filter(function (b) { return b.catalog_items; });
     var extra = $("#noClassExtra");
     if (!extra) return;
-    var more = (guest ? '<button class="btn btn-primary" type="button" id="noClassLogin" style="min-width:150px">Google 로그인</button>' : '') +
-      '<button class="btn btn-ghost" type="button" data-tab="enroll" style="min-width:120px">수강신청 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>' +
-      '<button class="btn btn-ghost" type="button" data-tab="books" style="min-width:120px">교재·N제 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>' +
-      '<button class="btn btn-ghost" type="button" data-tab="qna" style="min-width:120px">1:1 상담 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>';
+    /* 비로그인 화면: Google 로그인 버튼만 남긴다(수강신청·교재·N제·1:1 상담 바로가기는 화면 정리를 위해 제거). */
+    var more = guest
+      ? '<button class="btn btn-primary" type="button" id="noClassLogin" style="min-width:150px">Google 로그인</button>'
+      : '<button class="btn btn-ghost" type="button" data-tab="enroll" style="min-width:120px">수강신청 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>' +
+        '<button class="btn btn-ghost" type="button" data-tab="books" style="min-width:120px">교재·N제 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>' +
+        '<button class="btn btn-ghost" type="button" data-tab="qna" style="min-width:120px">1:1 상담 <svg width="12" height="12"><use href="#i-arrow"/></svg></button>';
     if (!books.length) {
       extra.innerHTML = more;
       return;
@@ -3274,6 +3248,13 @@ window.CONFIG = {
     renderMyBooks();
   }
 
+  /* 홈페이지(아임웹) 결제 페이지 직결 — 상품명 기준.
+     DB catalog_items.pay_url 은 아직 상담 링크(/meet)라, 아래에 등록된 상품은 결제 페이지로 바로 보낸다. */
+  var PAY_LINKS = {
+    "2028 성직 1~2월 선행반": "https://yeonteacher.kr/shop_view/?idx=144"
+  };
+  function payUrlOf(p) { return PAY_LINKS[p.name] || p.pay_url || ""; }
+
   function openCatalog(id) {
     var p = (DATA.catalog || []).filter(function (x) { return x.id === id; })[0];
     if (!p) return;
@@ -3297,10 +3278,11 @@ window.CONFIG = {
     $("#storeBody").innerHTML = body;
     var foot = "";
     if (owned && p.book_path) foot = '<button class="btn btn-primary btn-block" type="button" data-book="' + esc(p.id) + '"><svg width="16" height="16"><use href="#i-download"/></svg> ' + (isNje(p) ? "N제" : "교재") + ' PDF 내려받기</button>';
-    else if (owned) foot = '<div class="note"><svg width="15" height="15"><use href="#i-info"/></svg><span>구매는 확인됐지만 파일이 아직 올라오지 않았어요. 카카오채널로 알려 주시면 바로 보내 드릴게요.</span></div>';
+    else if (owned) foot = '<div class="note"><svg width="15" height="15"><use href="#i-info"/></svg><span>구매는 확인됐지만 파일이 아직 올라오지 않았어요. 1:1 상담으로 알려 주시면 바로 보내 드릴게요.</span></div>';
     else if (enrolled) foot = '<button class="btn btn-primary btn-block" type="button" data-open="' + esc(p.class_id) + '">강의실 가기</button>';
-    if (p.pay_url) foot += '<a class="btn btn-' + (owned || enrolled ? "ghost" : "primary") + ' btn-block" href="' + esc(p.pay_url) + '" target="_blank" rel="noopener noreferrer">결제 페이지로 이동</a>';
-    if (!p.pay_url && !owned && !enrolled) foot += '<a class="btn btn-primary btn-block" href="' + KAKAO + '" target="_blank" rel="noopener noreferrer">카카오채널로 문의</a>';
+    var payUrl = payUrlOf(p);
+    if (payUrl) foot += '<a class="btn btn-' + (owned || enrolled ? "ghost" : "primary") + ' btn-block" href="' + esc(payUrl) + '" target="_blank" rel="noopener noreferrer">결제 페이지로 이동</a>';
+    if (!payUrl && !owned && !enrolled) foot += '<a class="btn btn-primary btn-block" href="https://yeonteacher.kr/meet" target="_blank" rel="noopener noreferrer">홈페이지 상담 신청</a>';
     foot += '<button class="btn btn-ghost btn-block" type="button" data-close>닫기</button>';
     $("#storeFoot").innerHTML = foot;
     window.__engine.openSheet("sheetStore");
@@ -3504,7 +3486,7 @@ window.CONFIG = {
         window.__engine.toast("PDF가 아닌 파일이라 원본 그대로 내려받았어요. (" + name + ")");
         return;
       }
-      window.__engine.toast("워터마크를 만들지 못했어요. 잠시 뒤 다시 눌러 주세요. 계속되면 카카오채널로 알려 주세요.");
+      window.__engine.toast("워터마크를 만들지 못했어요. 잠시 뒤 다시 눌러 주세요. 계속되면 1:1 상담으로 알려 주세요.");
     });
   }
 
@@ -5192,7 +5174,7 @@ window.CONFIG = {
       onPlay: function (url) { LAST_PLAY = url; },
       download: function (path, label) { downloadPath("materials", path, label); },
       downloadBook: function (item) {
-        if (!item.book_path) { flash("교재 파일이 아직 등록되지 않았어요. 카카오채널로 알려 주세요."); return; }
+        if (!item.book_path) { flash("교재 파일이 아직 등록되지 않았어요. 1:1 상담으로 알려 주세요."); return; }
         downloadPath("materials", item.book_path, item.name);
       },
       saveQuiz: saveQuiz,
