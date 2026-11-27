@@ -3854,9 +3854,21 @@ window.CONFIG = {
   function dmDownload(path, name) {
     if (!path) return;
     if (MODE !== "live" || !sb) { flash("미리보기 모드 — 파일은 연결 후 열립니다."); return; }
+    function go(url) {
+      try {
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = name || "";
+        a.rel = "noopener";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 1000);
+      } catch (e) { window.open(url, "_blank", "noopener"); }
+    }
     sb.storage.from(DM_BUCKET).createSignedUrl(path, 300, { download: name || true }).then(function (r) {
       if (r.error || !r.data) { flash("파일을 열지 못했어요: " + ((r.error && r.error.message) || "권한을 확인해 주세요")); return; }
-      window.open(r.data.signedUrl, "_blank", "noopener");
+      go(r.data.signedUrl);
     });
   }
   function dmOpenViewer(path, name) {
