@@ -3253,7 +3253,11 @@ window.CONFIG = {
   var PAY_LINKS = {
     "2028 성직 1~2월 선행반": "https://yeonteacher.kr/shop_view/?idx=144"
   };
-  function payUrlOf(p) { return PAY_LINKS[p.name] || p.pay_url || ""; }
+  function payUrlOf(p) {
+    /* 관리자가 상품에 실제 결제 링크를 넣어 두면 그것을 먼저 쓴다(지금 DB 값은 상담 링크 /meet). */
+    if (p.pay_url && p.pay_url.indexOf("/meet") < 0) return p.pay_url;
+    return PAY_LINKS[p.name] || p.pay_url || "";
+  }
 
   function openCatalog(id) {
     var p = (DATA.catalog || []).filter(function (x) { return x.id === id; })[0];
