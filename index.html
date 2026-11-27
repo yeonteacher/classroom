@@ -982,6 +982,11 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
             <option value="parent">학부모</option>
           </select>
         </label>
+        <label class="field" id="onbChildWrap" hidden>
+          <span class="k">자녀 이름 <span style="font-weight:500;color:var(--muted-2)">(수강생 학부모님만 입력 · 선택)</span></span>
+          <input type="text" id="onbChild" name="child_name" placeholder="예: 김민성 (선택)">
+          <span class="hint">적어 주시면 자녀 수강생과 연결해 두고, 상담할 때 바로 확인합니다.</span>
+        </label>
         <label class="field">
           <span class="k" id="onbSchoolK">학교<span class="req">*</span></span>
           <input type="text" id="onbSchool" name="school" placeholder="예: 대동세무고" autocomplete="organization" required>
@@ -2786,7 +2791,9 @@ window.CONFIG = {
       var needOnboard = !profile || !profile.phone || !profile.school || !profile.grade;
       if (needOnboard) {
         $("#onbEmail").textContent = email;
-        if ($("#onbType")) { $("#onbType").value = (profile && profile.member_type) || "student"; onbTypeUI(); }
+        if ($("#onbType")) { $("#onbType").value = (profile && profile.member_type) || "student"; }
+        if ($("#onbChild") && profile && profile.child_name) $("#onbChild").value = profile.child_name;
+        onbTypeUI();
         screen("screenOnboard");
         return;
       }
@@ -3695,6 +3702,9 @@ window.CONFIG = {
     var el = $("#onbType");
     var t = (el && el.value) || "student";
     var parent = t === "parent";
+    var cw = $("#onbChildWrap"), ci = $("#onbChild");
+    if (cw) cw.hidden = !parent;
+    if (ci) { ci.required = false; ci.placeholder = "예: 김민성 (선택)"; }
     var sk = $("#onbSchoolK"), gk = $("#onbGradeK"), pk = $("#onbPhoneK"), pa = $("#onbParentK");
     if (sk) sk.innerHTML = parent ? '자녀 학교<span class="req">*</span>' : '학교<span class="req">*</span>';
     if (gk) gk.innerHTML = parent ? '자녀 학년<span class="req">*</span>' : '학년<span class="req">*</span>';
@@ -3713,11 +3723,13 @@ window.CONFIG = {
     var type = ($("#onbType") && $("#onbType").value) || "student";
     var school = $("#onbSchool").value.trim(), grade = $("#onbGrade").value.trim(),
         phone = $("#onbPhone").value.trim(), parent = $("#onbParent").value.trim();
+    var child = ($("#onbChild") && $("#onbChild").value || "").trim();
     if (!phone) { err.hidden = false; err.textContent = "연락처를 꼭 입력해 주세요."; return; }
     if (!school || !grade) { err.hidden = false; err.textContent = type === "parent" ? "자녀 학교·학년을 입력해 주세요." : "학교·학년을 입력해 주세요."; return; }
     if (MODE === "preview") { flash("미리보기 모드 — 저장되지 않아요."); return; }
     var btn = $("#onbSave"); btnBusy(btn, true, "저장 중…");
     var payload = { school: school || null, grade: grade || null, phone: phone, parent_phone: parent || null,
+      child_name: (type === "parent" && child) ? child : null,
       member_type: type, updated_at: new Date().toISOString() };
     var req = profile
       ? sb.from("profiles").update(payload).eq("id", session.user.id)
@@ -4281,7 +4293,9 @@ window.CONFIG = {
       }).join(" ");
       var books = AD.books.filter(function (b) { return (b.student_email || "").toLowerCase() === s.email.toLowerCase() && b.status === "active"; })
         .map(function (b) { var it = AD.catalog.filter(function (c) { return c.id === b.catalog_item_id; })[0]; return '<span class="ad-pill wait">' + esc(it ? it.name : "교재") + '</span>'; }).join(" ");
-      return '<tr><td><b style="font-weight:600">' + esc(s.name || "이름 없음") + '</b><div class="em">' + esc(s.email) + '</div></td>' +
+      return '<tr><td><b style="font-weight:600">' + esc(s.name || "이름 없음") + '</b>' +
+        (s.member_type === "parent" ? memberPill(s.email) : '') +
+        '<div class="em">' + esc(s.email) + '</div></td>' +
         '<td class="nowrap">' + esc(s.school || "—") + '<div class="em">' + esc(s.grade || "") + '</div></td>' +
         '<td class="nowrap">' + esc(s.phone || "—") + '<div class="em">' + esc(s.parent_phone || "") + '</div></td>' +
         '<td>' + (cls || '<span class="ad-pill off">수강권 없음</span>') + (books ? '<div style="margin-top:4px">' + books + '</div>' : "") + '</td>' +
@@ -4608,7 +4622,11 @@ window.CONFIG = {
   function memberPill(email) {
     var p = (AD.students || []).filter(function (s) { return (s.email || "").toLowerCase() === (email || "").toLowerCase(); })[0];
     var t = (p && p.member_type) || "student";
-    return '<span class="ad-pill ' + (t === "parent" ? "wait" : "on") + '" style="margin-left:2px">' + (t === "parent" ? "학부모" : "학생") + '</span>';
+    if (t === "parent") {
+      return '<span class="ad-pill wait" style="margin-left:2px">학부모' +
+        (p && p.child_name ? ' · 자녀: ' + esc(p.child_name) : '') + '</span>';
+    }
+    return '<span class="ad-pill on" style="margin-left:2px">학생</span>';
   }
 
   function dmPreview(m) {
