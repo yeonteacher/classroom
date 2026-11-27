@@ -368,6 +368,7 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 /* ───────── 탭 알림 배지 · 헤더 로그인 ───────── */
 .tab,.side-link{position:relative}
 .nbadge{position:absolute;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#DC2626;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1;letter-spacing:0}
+.nbadge[hidden]{display:none}
 .tab .nbadge{top:2px;right:calc(50% - 27px)}
 .side-link .nbadge{right:12px;top:50%;transform:translateY(-50%)}
 .login-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:9px;border:1px solid var(--line-strong);background:#fff;font-size:12.4px;font-weight:650;color:var(--ink-2);white-space:nowrap}
@@ -3763,7 +3764,7 @@ window.CONFIG = {
         DM = r.data || [];
         renderDM();
         var v = (window.__engine && window.__engine.state) ? window.__engine.state.view : "";
-        if (!quiet || v === "qna") dmRead(); else countUnread();
+        if (v === "qna") dmRead(); else countUnread();
       });
   }
 
