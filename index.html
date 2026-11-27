@@ -3007,7 +3007,7 @@ window.CONFIG = {
     var bell = $("#bellBtn"); if (bell) bell.hidden = guest;
     var acct = $("#acctBtn"); if (acct) acct.hidden = guest;
 
-    $("#greetName").textContent = model.studentName;
+    var gn = $("#greetName"); if (gn) gn.textContent = model.studentName;
     var hv0 = $("#v0");
     if (hv0) {
       hv0.innerHTML = guest
@@ -3856,7 +3856,7 @@ window.CONFIG = {
       DATA.studentName = "게스트";
       applyStudentScreen(DATA);
       window.__engine.showView("enroll");
-    });
+    }).catch(function (e) { console.warn("guest load", e); });
   }
 
   function bindQna() {
