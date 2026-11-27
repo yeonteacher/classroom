@@ -397,6 +397,12 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .side-link .nbadge{right:12px;top:50%;transform:translateY(-50%)}
 .login-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:9px;border:1px solid var(--line-strong);background:#fff;font-size:12.4px;font-weight:650;color:var(--ink-2);white-space:nowrap}
 .login-btn:hover{background:var(--surface)}
+/* 관리자 → 학생 화면에서 돌아오는 버튼 (관리자에게만 표시) */
+.admin-back{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 11px;border-radius:9px;border:1px solid var(--line-strong);background:var(--surface-2);font-size:12.2px;font-weight:650;color:var(--ink-2);white-space:nowrap;letter-spacing:-.02em}
+.admin-back:hover{background:#fff;border-color:#C7CBD2}
+.admin-back svg{flex:none}
+.admin-back[hidden]{display:none}
+@media (max-width:399px){.admin-back{height:30px;padding:0 9px;font-size:11.6px}}
 
 /* ───────── 관리자 · DM 대화 목록/채팅 ───────── */
 .dml-list{max-height:440px;overflow-y:auto}
@@ -806,7 +812,7 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
 .ad-kpi .v small{font-size:11.4px;font-weight:600;color:var(--muted);margin-left:2px}
 .ad-sec{min-width:0;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
 .ad-sec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid var(--line-soft)}
-.ad-sec-head h2{font-size:14px;font-weight:650;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.ad-sec-head h2{font-size:14px;font-weight:650;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;flex-wrap:wrap;row-gap:4px}
 .ad-sec-head .sm-hint{display:inline}
 .ad-sec-body{padding:16px 18px}
 .ad-sec-body.tight{padding:0}
@@ -838,6 +844,8 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
 .ad-pill.on{background:var(--green-soft);color:var(--green)}
 .ad-pill.off{background:var(--surface-2);color:var(--muted)}
 .ad-pill.wait{background:var(--amber-soft);color:var(--amber)}
+.ad-pill.cls{background:var(--blue-soft);color:var(--blue-deep);border:1px solid var(--blue-line)}
+.ad-pill.cls.off{background:var(--surface-2);color:var(--muted);border-color:transparent}
 .ad-note{font-size:11.6px;color:var(--muted-2);line-height:1.65;margin-top:8px}
 .q-builder{border:1px solid var(--line);border-radius:var(--r-md);padding:14px;margin-bottom:10px;background:var(--surface)}
 .q-builder .qb-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
@@ -1066,6 +1074,9 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
           </div>
         </div>
         <div class="top-actions">
+          <button class="admin-back" type="button" id="topAdminBtn" hidden title="관리자 화면으로 돌아가기">
+            <svg width="14" height="14" aria-hidden="true"><use href="#i-shield"/></svg><span>관리자 화면</span>
+          </button>
           <button class="login-btn" type="button" id="guestLoginBtn" hidden>Google 로그인</button>
           <button class="icon-btn" type="button" id="bellBtn" aria-label="알림">
             <svg width="20" height="20"><use href="#i-bell"/></svg>
@@ -3092,6 +3103,8 @@ window.CONFIG = {
 
     var back = $("#backAdmin");
     if (back) back.hidden = !isAdmin;
+    var topAd = $("#topAdminBtn");
+    if (topAd) topAd.hidden = !isAdmin || guest;
 
     // 클래스가 하나뿐이면 사이드/탭 문구 유지, 공지가 있으면 홈에 표시
     if (!nonEnrolled) stampNotice();
@@ -3599,6 +3612,7 @@ window.CONFIG = {
         '<button class="btn btn-ghost" type="button" id="pfCancel">취소</button></div></form>';
     }
     return '<div class="acct-head"><div class="acct-av">' + esc(av) + '</div><div><b>' + esc(name) + '</b><span>수강생 · ' + esc(email) + '</span></div></div>' +
+      (isAdmin ? '<button class="btn btn-ghost" type="button" id="pfAdmin" style="width:100%;margin-top:16px;justify-content:center;gap:6px"><svg width="15" height="15" aria-hidden="true"><use href="#i-shield"/></svg>관리자 화면으로 돌아가기</button>' : '') +
       '<div class="kv" style="margin-top:16px">' +
       kv("이름", name) + kv("구글 이메일", email) +
       kv("학교", p.school || "—") + kv("학년", p.grade || "—") +
@@ -4711,6 +4725,25 @@ window.CONFIG = {
     return '<span class="ad-pill on" style="margin-left:2px">학생</span>';
   }
 
+  /* 현재 수강 중인 클래스 이름 (enrollments + classes) — 없으면 미수강 */
+  function activeClassNames(email) {
+    var key = String(email || "").toLowerCase(), seen = {}, out = [];
+    (AD.enrolls || []).forEach(function (e) {
+      if (String(e.student_email || "").toLowerCase() !== key) return;
+      if (String(e.status || "") !== "active") return;
+      var c = (AD.classes || []).filter(function (x) { return x.id === e.class_id; })[0];
+      if (!c || !c.name || c.is_active === false) return;
+      if (seen[c.name]) return;
+      seen[c.name] = 1; out.push(c.name);
+    });
+    return out;
+  }
+  function classPill(email) {
+    var names = activeClassNames(email);
+    if (!names.length) return '<span class="ad-pill cls off" title="수강 중인 클래스">미수강</span>';
+    return '<span class="ad-pill cls" title="수강 중인 클래스">' + esc(names.join(", ")) + '</span>';
+  }
+
   function dmPreview(m) {
     var b = String(m.body || "").replace(/\s+/g, " ").trim();
     if (!b) return dmKindOf(m) === "image" ? "사진" : "파일";
@@ -4780,7 +4813,7 @@ window.CONFIG = {
 
     function item(c) {
       return '<button class="dml-item' + (AD.dmOpen === c.email ? " on" : "") + '" type="button" data-act="dmopen" data-email="' + esc(c.email) + '">' +
-        '<div class="dml-t"><h4>' + esc(c.name || c.email) + memberPill(c.email) + '</h4>' +
+        '<div class="dml-t"><h4>' + esc(c.name || c.email) + memberPill(c.email) + classPill(c.email) + '</h4>' +
           '<p>' + (c.last ? (c.last.sender_role === "admin" ? "나: " : "") + esc(dmPreview(c.last)) : "") + '</p>' +
           '<p style="color:var(--muted-2)">' + esc(c.email) + '</p></div>' +
         '<div class="dml-n">' + (c.last ? esc(inqDate(c.last.created_at)) : "") +
@@ -4794,7 +4827,7 @@ window.CONFIG = {
     var chat = "";
     if (cur) {
       var av = (cur.name || "?").slice(0, 1);
-      chat = '<div class="ad-sec" style="margin-bottom:0"><div class="ad-sec-head"><h2>' + esc(cur.name || cur.email) + memberPill(cur.email) + '</h2>' +
+      chat = '<div class="ad-sec" style="margin-bottom:0"><div class="ad-sec-head"><h2>' + esc(cur.name || cur.email) + memberPill(cur.email) + classPill(cur.email) + '</h2>' +
           '<span class="sm-hint">' + esc(cur.email) + '</span></div>' +
         '<div class="dm-admin-body" id="adDmBody">' +
           cur.msgs.map(function (m) { return dmBubbleHTML(m, m.sender_role === "admin", av); }).join("") +
@@ -4858,6 +4891,14 @@ window.CONFIG = {
   }
 
   /* ── 관리자 액션 ── */
+  /* 관리자 → 학생 화면에서 관리자 화면으로 복귀 */
+  function backToAdmin() {
+    closeSheets();
+    screen("screenAdmin");
+    var bb = $("#backAdmin"); if (bb) bb.hidden = true;
+    var tb = $("#topAdminBtn"); if (tb) tb.hidden = true;
+  }
+
   function adSave(table, payload, id, okMsg) {
     if (MODE === "preview") { flash("미리보기 모드 — 저장되지 않아요."); return Promise.resolve(false); }
     var req = id ? sb.from(table).update(payload).eq("id", id) : sb.from(table).insert(payload);
@@ -5231,6 +5272,7 @@ window.CONFIG = {
       var mb = t.closest("#btnGoogle");
       if (mb) return;
       if (t.closest("#pfEdit")) { $("#acctBody").innerHTML = accountHTML(true); return; }
+      if (t.closest("#pfAdmin")) { backToAdmin(); return; }
       if (t.closest("#noClassLogin")) { signIn(); return; }
       if (t.closest("#pfCancel")) { $("#acctBody").innerHTML = accountHTML(false); return; }
       if (t.closest("#pfLogout")) {
@@ -5338,11 +5380,8 @@ window.CONFIG = {
         }).catch(function (err) { flash("학생 화면을 열지 못했어요: " + (err && err.message ? err.message : err)); });
         return;
       }
-      if (e.target.id === "backAdmin") {
-        screen("screenAdmin");
-        var bb = $("#backAdmin"); if (bb) bb.hidden = true;
-        return;
-      }
+      var tbtnGo = e.target.closest ? e.target.closest("#topAdminBtn, #backAdmin") : null;
+      if (tbtnGo) { backToAdmin(); return; }
       if (e.target.id === "adLogout") { logout(); return; }
     });
   }
