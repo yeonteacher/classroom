@@ -3999,7 +3999,7 @@ window.CONFIG = {
     if (!email) return Promise.resolve();
     var box = $("#dmBody");
     if (!quiet && box && !DM.length) box.innerHTML = '<div style="text-align:center;color:var(--muted-2);font-size:12.4px;padding:34px 0">불러오는 중…</div>';
-    /* 응답이 아예 오지 않는 경우에도 ‘불러오는 중…’에 갈히지 않도록 8초 워치독 */
+    /* 응답이 아예 오지 않는 경우에도 ‘불러오는 중…’에 갇히지 않도록 8초 워치독 */
     var watchdog = box ? setTimeout(function () {
       if (box && !DM.length && box.textContent && box.textContent.indexOf("불러오는 중") >= 0) {
         dmNotice("대화를 불러오지 못했어요. 잠시 뒤 다시 열어 주세요.");
