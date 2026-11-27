@@ -3595,15 +3595,24 @@ window.CONFIG = {
       });
   }
 
-  /* 로그아웃 — 열린 모달을 먼저 닫고, Supabase 응답과 상관없이 즉시 로그인 화면으로 보낸다 */
-  function logout() {
-    // ① 열려 있는 시트·모달을 즉시 모두 닫는다 (모달이 화면을 덮어 ‘안 눌린 것처럼’ 보이던 문제 방지)
+  /* 열려 있는 시트·확인창·오버레이를 즉시 모두 닫는다 */
+  function closeSheets() {
     try {
       $$(".sheet").forEach(function (s) { s.classList.remove("on"); });
+      var lc = document.getElementById("logoutConfirm");
+      if (lc) lc.classList.remove("on");
       var ov = document.getElementById("overlay");
       if (ov) ov.classList.remove("on");
+      var acct = document.getElementById("acctBody");
+      if (acct) acct.innerHTML = "";
       document.body.style.overflow = "";
     } catch (e) { /* noop */ }
+  }
+
+  /* 로그아웃 — 열린 모달을 먼저 닫고, Supabase 응답과 상관없이 즉시 비로그인 화면으로 보낸다 */
+  function logout() {
+    // ① 열려 있는 시트·확인창을 즉시 모두 닫는다 (로그아웃 확인창이 남아 보이던 문제)
+    closeSheets();
 
     // ② 화면 상태 초기화 + 비로그인 둘러보기로 전환
     session = null; profile = null; DATA = null; isAdmin = false; DM = [];
@@ -3637,9 +3646,9 @@ window.CONFIG = {
     try {
       if (sb && sb.auth) {
         var pr = sb.auth.signOut({ scope: "local" });
-        if (pr && pr.catch) pr.catch(function () {});
+        if (pr && pr.then) pr.then(closeSheets, closeSheets);
       }
-    } catch (e) { /* noop */ }
+    } catch (e) { closeSheets(); }
   }
 
   /* ── 온보딩 ── */
@@ -3856,6 +3865,7 @@ window.CONFIG = {
   /* ── 비로그인 둘러보기 ── */
   function startGuest() {
     GUEST = true; session = null; profile = null; isAdmin = false; DM = [];
+    closeSheets();
     stopDMWatch();
     setQnaBadge(0);
     screen("screenStudent");
