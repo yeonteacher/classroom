@@ -361,6 +361,9 @@ h1{font-size:23px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
 .gq h2 svg{color:var(--ink-2)}
 .gq .gq-lead{font-size:12.4px;color:var(--muted);line-height:1.72;margin-top:8px;max-width:56ch}
 .gq .gq-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.gq-sub{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.gq-sub p{font-size:12.2px;color:var(--muted);line-height:1.7}
+.gq-sub .btn{margin-top:10px}
 
 /* ───────── 탭 알림 배지 · 헤더 로그인 ───────── */
 .tab,.side-link{position:relative}
@@ -1203,12 +1206,22 @@ h1 .honorific{font-weight:500;font-size:.78em;color:#64748B;letter-spacing:-.005
         <section class="dm" id="gqBox" aria-labelledby="gqTitle">
           <div class="gq">
             <h2 id="gqTitle"><svg width="16" height="16"><use href="#i-chat"/></svg> 1:1 상담</h2>
-            <p class="gq-lead"><b>학생·학부모 모두</b> 이용할 수 있어요. 구글 로그인하면 이 화면이 <b>이어지는 1:1 채팅방</b>으로 바뀌고, 선생님 답변을 놓치지 않고 받아볼 수 있습니다.<br>로그인 없이 상담을 원하시면 공식 홈페이지 상담 폼을 이용해 주세요.</p>
-            <div class="gq-actions">
-              <button class="btn btn-primary btn-sm" type="button" id="gqLogin">Google 로그인하고 1:1 DM 시작하기</button>
-              <a class="btn btn-ghost btn-sm" href="https://yeonteacher.kr/meet" target="_blank" rel="noopener noreferrer">로그인 없이 상담 신청하기 <svg width="12" height="12"><use href="#i-arrow"/></svg></a>
+            <div id="gqGuest">
+              <p class="gq-lead"><b>이미 수강 등록한 학생이신가요?</b><br>Google 로그인 후 1:1 상담을 이용할 수 있어요.</p>
+              <div class="gq-actions">
+                <button class="btn btn-primary btn-sm" type="button" id="gqLogin">Google 로그인</button>
+              </div>
+              <div class="gq-sub">
+                <p><b>아직 수강 등록 전이신가요?</b><br>첫 신규 문의는 홈페이지 상담 신청을 이용해 주세요.</p>
+                <a class="btn btn-ghost btn-sm" href="https://yeonteacher.kr/meet" target="_blank" rel="noopener noreferrer">홈페이지 상담 신청하기 <svg width="12" height="12"><use href="#i-arrow"/></svg></a>
+              </div>
             </div>
-            <p style="margin-top:12px;font-size:11.4px;color:var(--muted-2);line-height:1.65">상담 신청서는 공식 홈페이지(yeonteacher.kr)에서 작성하시면 선생님이 확인 후 연락드립니다.</p>
+            <div id="gqMember" hidden>
+              <p class="gq-lead"><b>수강 등록된 학생 전용 1:1 상담 공간입니다.</b><br>첫 신규 문의는 홈페이지 상담 신청을 이용해 주세요.</p>
+              <div class="gq-actions">
+                <a class="btn btn-primary btn-sm" href="https://yeonteacher.kr/meet" target="_blank" rel="noopener noreferrer">홈페이지 상담 신청하기 <svg width="12" height="12"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2925,7 +2938,8 @@ window.CONFIG = {
       classes: classes,
       faqs: faqs,
       catalog: rows0.catalog,
-      books: rows0.books
+      books: rows0.books,
+      enrollCount: (rows0.enrollments || []).length
     };
   }
 
@@ -3728,7 +3742,7 @@ window.CONFIG = {
   }
 
   function loadDM(quiet) {
-    if (!session || MODE !== "live") return Promise.resolve();
+    if (!session || MODE !== "live" || !qnaOpen()) return Promise.resolve();
     var email = myEmail();
     if (!email) return Promise.resolve();
     var box = $("#dmBody");
@@ -3762,7 +3776,7 @@ window.CONFIG = {
   }
 
   function countUnread() {
-    if (!session || MODE !== "live") { setQnaBadge(0); return; }
+    if (!session || MODE !== "live" || !qnaOpen()) { setQnaBadge(0); return; }
     sb.from("dm_messages").select("id", { count: "exact", head: true })
       .eq("student_email", myEmail()).eq("sender_role", "admin").eq("is_read_by_student", false)
       .then(function (r) { if (!r.error) setQnaBadge(r.count || 0); });
@@ -3817,17 +3831,23 @@ window.CONFIG = {
     if (DM_TIMER) return;
     DM_TIMER = setInterval(function () {
       if (document.visibilityState !== "visible" || MODE !== "live") return;
-      if (!session) return;
+      if (!session || !qnaOpen()) { setQnaBadge(0); return; }
       var v = (window.__engine && window.__engine.state) ? window.__engine.state.view : "";
       if (v === "qna") loadDM(true); else countUnread();
     }, 6000);
   }
 
+  function qnaOpen() { return !!(session && DATA && DATA.enrollCount > 0); }
+
   function refreshQna() {
     var dmBox = $("#dmBox"), gqBox = $("#gqBox");
-    if (dmBox) dmBox.hidden = !session;
-    if (gqBox) gqBox.hidden = !!session;
-    if (!session) { setQnaBadge(0); return; }
+    var open = qnaOpen();
+    if (dmBox) dmBox.hidden = !open;
+    if (gqBox) gqBox.hidden = open;
+    var gg = $("#gqGuest"), gm = $("#gqMember");
+    if (gg) gg.hidden = !!session;
+    if (gm) gm.hidden = !session;
+    if (!open) { setQnaBadge(0); stopDMWatch(); return; }
     loadDM();
     startDMWatch();
     startDMWatchTimer();
