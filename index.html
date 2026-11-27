@@ -3763,6 +3763,7 @@ window.CONFIG = {
   var DM_URL = {};                                  // path → 서명 URL (1시간)
   var DM_PICK = null;                               // { file, kind, url }
   var DM_SENDING = false;
+  var DM_SIG = "";
   var DM_IMG_MAX = 10 * 1024 * 1024;
   var DM_DOC_MAX = 20 * 1024 * 1024;
   var DM_EXT = ["jpg", "jpeg", "png", "webp", "gif", "heic", "heif", "pdf", "hwp", "hwpx", "docx", "xlsx", "zip"];
@@ -4000,8 +4001,10 @@ window.CONFIG = {
       .order("created_at", { ascending: true }).limit(200)
       .then(function (r) {
         if (r.error) { console.warn(r.error); return; }
-        DM = r.data || [];
-        renderDM();
+        var list = r.data || [];
+        var sig = list.map(function (m) { return m.id + ":" + (m.is_read_by_student ? 1 : 0); }).join("|");
+        DM = list;
+        if (sig !== DM_SIG) { DM_SIG = sig; renderDM(); }
         var v = (window.__engine && window.__engine.state) ? window.__engine.state.view : "";
         if (v === "qna") dmRead(); else countUnread();
       });
@@ -4132,7 +4135,7 @@ window.CONFIG = {
 
   /* ── 비로그인 둘러보기 ── */
   function startGuest() {
-    GUEST = true; session = null; profile = null; isAdmin = false; DM = [];
+    GUEST = true; session = null; profile = null; isAdmin = false; DM = []; DM_SIG = "";
     closeSheets();
     stopDMWatch();
     setQnaBadge(0);
